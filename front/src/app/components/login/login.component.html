@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
+            <p>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Login" name="login" [(ngModel)]="login.email" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Senha" name="senha" [(ngModel)]="login.senha" required>
+                </mat-form-field>
+            </p>
+            <div class="button">
+                <button type="submit" mat-button>Login</button>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-content>
+        <div class="button">
+            <a [routerLink]="['/cadastro-usuario']" mat-button color='primary'>Cadastrar!</a>
+        </div>
+    </mat-card-content>
+
+</mat-card>

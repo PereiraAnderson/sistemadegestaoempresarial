@@ -1,0 +1,23 @@
+# Default
+.git
+.gitignore
+.dockerignore
+Docker
+Makefile
+.vscode
+
+# Back
+bin
+obj
+
+# Front
+dist
+tmp
+out-tsc
+node_modules
+/.sass-cache
+npm-debug.log
+
+# System Files
+.DS_Store
+Thumbs.db

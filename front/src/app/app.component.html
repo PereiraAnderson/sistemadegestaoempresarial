@@ -1,0 +1,22 @@
+<app-toolbar></app-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened disableClose>
+        <mat-list>
+            <mat-nav-list>
+                <a *ngIf="perfil == 1" mat-list-item routerLink="/usuarios">
+                    <mat-icon>person</mat-icon>
+                    <mat-label class="ml-1">Usuários</mat-label>
+                </a>
+            </mat-nav-list>
+            <mat-nav-list>
+                <a *ngIf="perfil == 3" mat-list-item routerLink="/pontos">
+                    <mat-icon>schedule</mat-icon>
+                    <mat-label class="ml-1">Pontos</mat-label>
+                </a>
+            </mat-nav-list>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

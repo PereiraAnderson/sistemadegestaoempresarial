@@ -1,0 +1,68 @@
+<div class="ml-5">
+    <div class="row">
+        <div class="col m-3">
+            <mat-label>{{acao}} usuário</mat-label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field>
+                            <mat-label>Tipo de Usuário</mat-label>
+                            <mat-select name="perfil" [(ngModel)]="usuario.perfil" required [disabled]="usuario.id">
+                                <mat-option *ngFor="let p of perfis; index as i" [value]="i+1">{{p}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>Login</mat-label>
+                            <input matInput placeholder="Login" name="login" [(ngModel)]="usuario.login"
+                                [disabled]="usuario.id" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Nome" name="nome" [(ngModel)]="usuario.nome" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field>
+                            <mat-label>CPF</mat-label>
+                            <input matInput placeholder="CPF" name="cpf" mask="000.000.000-00" [(ngModel)]="usuario.cpf"
+                                required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>E-mail</mat-label>
+                            <input type="email" matInput placeholder="E-mail" name="email" [(ngModel)]="usuario.email"
+                                required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!usuario.id">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>Senha</mat-label>
+                            <input type="password" matInput placeholder="Senha" minlength="6" name="senha"
+                                [(ngModel)]="usuario.senha" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-2">
+                        <button type="submit" mat-raised-button>{{acao}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
