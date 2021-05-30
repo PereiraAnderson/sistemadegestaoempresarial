@@ -16,7 +16,7 @@ namespace SGE.Services.Interfaces
         Usuario Get(string id, IEnumerable<string> includes = null);
         Usuario GetByCPF(string cpf, IEnumerable<string> includes = null);
         Usuario GetByEmail(string email, IEnumerable<string> includes = null);
-        Usuario Add(Usuario usuario, EnumUsuarioPerfil perfil);
+        Task<Usuario> Add(Usuario usuario, EnumUsuarioPerfil perfil);
         Usuario Update(UsuarioView usuarioView);
         Usuario Remove(Usuario usuario);
         Usuario Remove(string id);

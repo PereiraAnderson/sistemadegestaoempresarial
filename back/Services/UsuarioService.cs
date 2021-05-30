@@ -50,7 +50,7 @@ namespace SGE.Services
         public Usuario GetByEmail(string email, IEnumerable<string> includes = null) =>
             _repo.GetByEmail(email, includes);
 
-        public Usuario Add(Usuario usuario, EnumUsuarioPerfil perfil)
+        public async Task<Usuario> Add(Usuario usuario, EnumUsuarioPerfil perfil)
         {
             _enderecoService ??= _serviceProvider.GetRequiredService<IPontoService>();
             _userManager ??= _serviceProvider.GetRequiredService<UserManager<Usuario>>();
@@ -59,12 +59,12 @@ namespace SGE.Services
             usuario.DataCriacao = DateTimeOffset.Now;
             usuario.Ativo = true;
 
-            var ret = _userManager.CreateAsync(usuario, usuario.PasswordHash).Result;
+            var ret = await _userManager.CreateAsync(usuario, usuario.PasswordHash);
             if (!ret.Succeeded)
                 throw new Exception(string.Concat(ret.Errors.Select(x => x.Description)));
 
             var claim = new Claim(ClaimTypes.Role, perfil.ToString());
-            _userManager.AddClaimAsync(usuario, claim);
+            await _userManager.AddClaimAsync(usuario, claim);
 
             return usuario;
         }

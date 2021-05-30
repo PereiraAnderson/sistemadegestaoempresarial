@@ -15,6 +15,7 @@ using SGE.Infra.Utils;
 using SGE.Infra.Views;
 using SGE.Infra.Views.Models;
 using SGE.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace SGE.Controllers
 {
@@ -72,7 +73,7 @@ namespace SGE.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostUsuarios([FromBody] UsuarioView usuario)
+        public async Task<IActionResult> PostUsuarios([FromBody] UsuarioView usuario)
         {
             switch (UserPerfil)
             {
@@ -86,7 +87,7 @@ namespace SGE.Controllers
 
             try
             {
-                var result = _service.Add(usuario.ToModel(), usuario.Perfil);
+                var result = await _service.Add(usuario.ToModel(), usuario.Perfil);
                 return CreatedAtAction(nameof(GetUsuario), new { id = result.Id }, result.ToView());
             }
             catch (Exception e)
