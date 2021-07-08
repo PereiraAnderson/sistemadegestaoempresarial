@@ -1,23 +1,23 @@
 # Default
-.git
-.gitignore
-.dockerignore
-Docker
-Makefile
-.vscode
+**/.git
+**/.gitignore
+**/.dockerignore
+**/*.dockerfile
+**/Makefile
+**/.vscode
 
-# Back
-bin
-obj
+# Back and xUnitTest
+**/bin
+**/obj
 
 # Front
-dist
-tmp
-out-tsc
-node_modules
-/.sass-cache
-npm-debug.log
+**/dist
+**/tmp
+**/out-tsc
+**/node_modules
+**/.sass-cache
+**/npm-debug.log
 
 # System Files
-.DS_Store
-Thumbs.db
+**/.DS_Store
+**/Thumbs.db
