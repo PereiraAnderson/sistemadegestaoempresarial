@@ -24,15 +24,21 @@ namespace SGE.Services
     {
         private readonly IUsuarioRepository _repo;
         private readonly IServiceProvider _serviceProvider;
-        private IConfiguration _configuration;
-        private SignInManager<Usuario> _signInManager;
-        private UserManager<Usuario> _userManager;
-        private IPontoService _enderecoService;
+        private readonly IConfiguration _configuration;
+        private readonly SignInManager<Usuario> _signInManager;
+        private readonly UserManager<Usuario> _userManager;
+        private readonly IPontoService _pontoService;
 
-        public UsuarioService(IUsuarioRepository repo, IServiceProvider serviceProvider)
+        public UsuarioService(IUsuarioRepository repo, IPontoService pontoService,
+            UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
+            IServiceProvider serviceProvider, IConfiguration configuration)
         {
             _repo = repo;
             _serviceProvider = serviceProvider;
+            _userManager = userManager;
+            _pontoService = pontoService;
+            _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         public IEnumerable<Usuario> Get(UsuarioFiltro filtro = null, Ordenacao ordenacao = null) =>
@@ -52,9 +58,6 @@ namespace SGE.Services
 
         public async Task<Usuario> Add(Usuario usuario, EnumUsuarioPerfil perfil)
         {
-            _enderecoService ??= _serviceProvider.GetRequiredService<IPontoService>();
-            _userManager ??= _serviceProvider.GetRequiredService<UserManager<Usuario>>();
-
             usuario.Id = Guid.NewGuid().ToString();
             usuario.DataCriacao = DateTimeOffset.Now;
             usuario.Ativo = true;
@@ -71,9 +74,6 @@ namespace SGE.Services
 
         public Usuario Update(UsuarioView usuarioView)
         {
-            _enderecoService ??= _serviceProvider.GetRequiredService<IPontoService>();
-            _userManager ??= _serviceProvider.GetRequiredService<UserManager<Usuario>>();
-
             var usuario = _userManager.FindByIdAsync(usuarioView.Id).Result;
             if (usuario == null)
                 throw new Exception("Id inexistente");
@@ -109,12 +109,10 @@ namespace SGE.Services
             if (usuario == null)
                 throw new Exception("E-mail e/ou senha incorreta");
 
-            _userManager ??= _serviceProvider.GetRequiredService<UserManager<Usuario>>();
             var loggedinUser = await _userManager.CheckPasswordAsync(usuario, login.Senha);
             if (!loggedinUser)
                 throw new Exception("E-mail e/ou senha incorreta");
 
-            _signInManager ??= _serviceProvider.GetRequiredService<SignInManager<Usuario>>();
             var result = await _signInManager.PasswordSignInAsync(usuario, login.Senha, false, false);
 
             if (!result.Succeeded)
@@ -134,8 +132,6 @@ namespace SGE.Services
 
         public Usuario AlterarSenha(AlterarSenha alterarSenha)
         {
-            _userManager ??= _serviceProvider.GetRequiredService<UserManager<Usuario>>();
-
             var usuario = _userManager.FindByNameAsync(alterarSenha.Email).Result;
             if (usuario == null)
                 throw new Exception("E-mail inexistente");
@@ -154,8 +150,6 @@ namespace SGE.Services
 
         private JwtSecurityToken CreateToken(Usuario usuario)
         {
-            _configuration ??= _serviceProvider.GetRequiredService<IConfiguration>();
-
             var claims = _signInManager.CreateUserPrincipalAsync(usuario).Result;
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Autentication:SecurityKey"]));
