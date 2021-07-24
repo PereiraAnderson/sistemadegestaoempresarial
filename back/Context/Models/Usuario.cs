@@ -1,21 +1,23 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+using SGE.Infra.Enums;
 
 namespace SGE.Context.Models
 {
-    public class Usuario : IdentityUser
+    public class Usuario : GenericModel
     {
         [Required]
-        public bool Ativo { get; set; }
-
-        [Required]
-        public DateTimeOffset DataCriacao { get; set; }
-
-        public DateTimeOffset? DataModificacao { get; set; }
-
         public string Nome { get; set; }
 
+        [Required]
         public string CPF { get; set; }
+
+        [Required]
+        public string Login { get; set; }
+
+        [Required]
+        public string Senha { get; set; }
+
+        [Required]
+        public EnumUsuarioPerfil Perfil { get; set; }
     }
 }

@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SGE.Controllers.Utils;
-using SGE.Context.Models;
 using SGE.Extensions;
-using SGE.Infra.Enums;
 using SGE.Infra.Filters;
 using SGE.Infra.Utils;
 using SGE.Infra.Views;
 using SGE.Infra.Views.Models;
 using SGE.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace SGE.Controllers
 {
@@ -25,7 +19,6 @@ namespace SGE.Controllers
         private readonly ILogger<UsuarioController> _logger;
         private readonly IUsuarioService _service;
         private readonly IServiceProvider _serviceProvider;
-        private SignInManager<Usuario> _signInManager;
 
         public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService service, IServiceProvider serviceProvider)
         {
@@ -35,7 +28,6 @@ namespace SGE.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult GetUsuarios([FromQuery] Paginacao paginacao, [FromQuery] UsuarioFiltro filtro, [FromQuery] Ordenacao ordenacao)
         {
             try
@@ -57,8 +49,7 @@ namespace SGE.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
-        public IActionResult GetUsuario([FromRoute] string id, [FromQuery] IEnumerable<string> includes)
+        public IActionResult GetUsuario([FromRoute] long id, [FromQuery] IEnumerable<string> includes)
         {
             try
             {
@@ -73,21 +64,11 @@ namespace SGE.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUsuarios([FromBody] UsuarioView usuario)
+        public IActionResult PostUsuario([FromBody] UsuarioView usuario)
         {
-            switch (UserPerfil)
-            {
-                case EnumUsuarioPerfil.SGE:
-                    break;
-                default:
-                    if (usuario.Perfil != EnumUsuarioPerfil.FUNCIONARIO)
-                        return BadRequest(new Erro { Mensagem = "Não é possível criar este perfil de usuário." });
-                    break;
-            }
-
             try
             {
-                var result = await _service.Add(usuario.ToModel(), usuario.Perfil);
+                var result = _service.Add(usuario.ToModel());
                 return CreatedAtAction(nameof(GetUsuario), new { id = result.Id }, result.ToView());
             }
             catch (Exception e)
@@ -97,12 +78,11 @@ namespace SGE.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult PutUsuario([FromBody] UsuarioView usuario)
         {
             try
             {
-                var result = _service.Update(usuario);
+                var result = _service.Update(usuario.ToModel());
                 return Ok(result.ToView());
             }
             catch (Exception e)
@@ -112,7 +92,6 @@ namespace SGE.Controllers
         }
 
         [HttpPut("AlteraSenha")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult PutUsuarioAlteraSenha([FromBody] AlterarSenha alterarSenha)
         {
             try
@@ -127,8 +106,7 @@ namespace SGE.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
-        public IActionResult DeleteUsuarios([FromRoute] string id)
+        public IActionResult DeleteUsuarios([FromRoute] long id)
         {
             try
             {
@@ -146,22 +124,13 @@ namespace SGE.Controllers
         {
             try
             {
-                var result = _service.Login(login).Result;
+                var result = _service.Login(login);
                 return Ok(result);
             }
             catch (Exception e)
             {
                 return BadRequest(new Erro { Mensagem = e.Message, Detalhes = e.InnerException?.Message }); ;
             }
-        }
-
-        [HttpPost("Logout")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
-        public IActionResult Logout()
-        {
-            _signInManager ??= _serviceProvider.GetRequiredService<SignInManager<Usuario>>();
-            _signInManager.SignOutAsync();
-            return Ok();
         }
     }
 }

@@ -11,6 +11,6 @@ namespace SGE.Context.Repositories.Interfaces
         IOrderedQueryable<Usuario> Get(UsuarioFiltro filtro = null, Ordenacao ordenacao = null);
         Paginacao<Usuario> Get(Paginacao paginacao, UsuarioFiltro filtro = null, Ordenacao ordenacao = null);
         Usuario GetByCPF(string cpf, IEnumerable<string> includes = null);
-        Usuario GetByEmail(string email, IEnumerable<string> includes = null);
+        Usuario GetByLogin(string login, IEnumerable<string> includes = null);
     }
 }

@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
 import { PontoService } from 'src/app/api-services/ponto.service';
 import { Ponto } from 'src/app/models/ponto';
@@ -23,7 +24,12 @@ export class PontosComponent implements AfterViewInit {
 
   get() {
     this.isLoadingResults = true;
-    this.pontoService.get()
+
+    const params = new HttpParams()
+      .set("OrdenaPor", "Data")
+      .set("OrdenacaoAsc", "false");
+
+    this.pontoService.get({ params })
       .then((data: any) => {
         this.isLoadingResults = false;
         this.isError = false;

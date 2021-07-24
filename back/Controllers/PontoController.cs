@@ -27,7 +27,6 @@ namespace SGE.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult GetPontos([FromQuery] Paginacao paginacao, [FromQuery] PontoFiltro filtro, [FromQuery] Ordenacao ordenacao)
         {
             try
@@ -49,7 +48,6 @@ namespace SGE.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult GetPonto([FromRoute] long id, [FromQuery] IEnumerable<string> includes)
         {
             try
@@ -64,7 +62,6 @@ namespace SGE.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult PostPontos([FromBody] PontoView Ponto)
         {
             try
@@ -79,7 +76,6 @@ namespace SGE.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult PutPonto([FromBody] PontoView Ponto)
         {
             try
@@ -94,7 +90,6 @@ namespace SGE.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "SGE, EMPRESA, FUNCIONARIO")]
         public IActionResult DeletePontos([FromRoute] long id)
         {
             try

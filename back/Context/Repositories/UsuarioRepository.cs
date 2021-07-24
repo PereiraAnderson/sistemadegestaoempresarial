@@ -31,9 +31,9 @@ namespace SGE.Context.Repositories
             return model;
         }
 
-        public Usuario GetByEmail(string email, IEnumerable<string> includes = null)
+        public Usuario GetByLogin(string login, IEnumerable<string> includes = null)
         {
-            var model = _context.Usuario.SingleOrDefault(x => x.Email.Equals(email));
+            var model = _context.Usuario.SingleOrDefault(x => x.Login.Equals(login));
             if (model != null && includes != null && includes.Count() > 0)
                 foreach (string include in includes)
                     Include(model, include.Split('.'));

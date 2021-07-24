@@ -4,7 +4,7 @@ import { Usuario } from './usuario';
 export class Ponto extends GenericModel {
     data: any;
 
-    usuarioId: string;
+    usuarioId: number;
     usuario: Usuario;
 
     constructor(item?) {

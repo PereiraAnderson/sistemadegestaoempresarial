@@ -8,11 +8,11 @@ using SGE.Services.Interfaces;
 
 namespace SGE.Services
 {
-    public class EnderecoService : IPontoService
+    public class PontoService : IPontoService
     {
         private readonly IPontoRepository _repo;
 
-        public EnderecoService(IPontoRepository repo)
+        public PontoService(IPontoRepository repo)
         {
             _repo = repo;
         }
@@ -26,42 +26,42 @@ namespace SGE.Services
         public Ponto Get(long id, IEnumerable<string> includes = null) =>
             _repo.Get(id, includes);
 
-        public Ponto Add(Ponto Ponto)
+        public Ponto Add(Ponto ponto)
         {
-            var ret = _repo.Add(Ponto);
+            var ret = _repo.Add(ponto);
             _repo.SaveChanges();
             return ret;
         }
 
-        public void Add(IEnumerable<Ponto> enderecos)
+        public void Add(IEnumerable<Ponto> pontos)
         {
-            _repo.Add(enderecos);
+            _repo.Add(pontos);
             _repo.SaveChanges();
         }
 
-        public Ponto Update(Ponto Ponto)
+        public Ponto Update(Ponto ponto)
         {
-            var ret = _repo.Update(Ponto);
-            _repo.SaveChanges();
-            return ret;
-        }
-
-        public void Update(IEnumerable<Ponto> enderecos)
-        {
-            _repo.Update(enderecos);
-            _repo.SaveChanges();
-        }
-
-        public Ponto Remove(Ponto Ponto)
-        {
-            var ret = _repo.Remove(Ponto);
+            var ret = _repo.Update(ponto);
             _repo.SaveChanges();
             return ret;
         }
 
-        public void Remove(IEnumerable<Ponto> enderecos)
+        public void Update(IEnumerable<Ponto> pontos)
         {
-            _repo.Remove(enderecos);
+            _repo.Update(pontos);
+            _repo.SaveChanges();
+        }
+
+        public Ponto Remove(Ponto ponto)
+        {
+            var ret = _repo.Remove(ponto);
+            _repo.SaveChanges();
+            return ret;
+        }
+
+        public void Remove(IEnumerable<Ponto> pontos)
+        {
+            _repo.Remove(pontos);
             _repo.SaveChanges();
         }
 

@@ -9,7 +9,7 @@ namespace SGE.Infra.Views.Models
         public DateTimeOffset Data { get; set; }
 
         [Required]
-        public string UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public UsuarioView Usuario { get; set; }
     }
 }

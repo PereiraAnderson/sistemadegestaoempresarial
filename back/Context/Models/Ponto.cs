@@ -11,7 +11,7 @@ namespace SGE.Context.Models
 
         [Required]
         [ForeignKey("UsuarioId")]
-        public string UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
     }

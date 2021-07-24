@@ -8,32 +8,35 @@ namespace SGE.Extensions
 {
     public static class UsuarioExtension
     {
-        public static Usuario ToModel(this UsuarioView usuario) =>
-            new Usuario
+        public static Usuario ToModel(this UsuarioView view)
+        {
+            var model = new Usuario
             {
-                Id = usuario.Id,
-                Ativo = usuario.Ativo,
-                DataCriacao = usuario.DataCriacao,
-                DataModificacao = usuario.DataModificacao,
-                Nome = usuario.Nome,
-                CPF = usuario.CPF,
-                UserName = usuario.Email,
-                Email = usuario.Email,
-                NormalizedEmail = usuario.Email.Normalize(),
-                PasswordHash = usuario.Senha
+                Nome = view.Nome,
+                CPF = view.CPF,
+                Perfil = view.Perfil,
+                Login = view.Login,
+                Senha = view.Senha
             };
 
-        public static UsuarioView ToView(this Usuario usuario) =>
-            new UsuarioView
+            GenericViewExtension.ToModel(view, model);
+            return model;
+        }
+
+        public static UsuarioView ToView(this Usuario model)
+        {
+            var view = new UsuarioView
             {
-                Id = usuario.Id,
-                Ativo = usuario.Ativo,
-                DataCriacao = usuario.DataCriacao,
-                DataModificacao = usuario.DataModificacao,
-                Nome = usuario.Nome,
-                CPF = usuario.CPF,
-                Email = usuario.UserName
+                Nome = model.Nome,
+                CPF = model.CPF,
+                Perfil = model.Perfil,
+                Login = model.Login,
+                Senha = model.Senha
             };
+
+            GenericViewExtension.ToView(model, view);
+            return view;
+        }
 
         public static IQueryable<Usuario> AplicaFiltro(this IQueryable<Usuario> query, UsuarioFiltro filtro)
         {
@@ -42,18 +45,13 @@ namespace SGE.Extensions
                 if (!string.IsNullOrWhiteSpace(filtro.CPF))
                     query = query.Where(x => x.CPF.Contains(filtro.CPF));
 
-                if (!string.IsNullOrWhiteSpace(filtro.UserName))
-                    query = query.Where(x => x.UserName.Contains(filtro.UserName));
+                if (!string.IsNullOrWhiteSpace(filtro.Login))
+                    query = query.Where(x => x.Login.Contains(filtro.Login));
 
                 if (!string.IsNullOrWhiteSpace(filtro.Nome))
                     query = query.Where(x => x.Nome.Contains(filtro.Nome));
 
-                if (filtro.Includes != null && filtro.Includes.Count() > 0)
-                    foreach (string include in filtro.Includes)
-                        query = query.Include(include);
-
-                if (filtro.Ativo.HasValue)
-                    query = query.Where(q => q.Ativo == filtro.Ativo);
+                query = query.AplicaGenericFilter(filtro);
             }
 
             return query;
