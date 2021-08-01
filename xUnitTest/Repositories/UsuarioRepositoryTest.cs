@@ -18,7 +18,7 @@ namespace SGE.Test.Repositories
             _usuarioRepository = new UsuarioRepository(dbContext);
         }
 
-        [Fact, TestPriority(0)]
+        [Fact]
         public void UsuarioRepositoryAddOkTest()
         {
             var usuario = new Usuario
@@ -34,13 +34,44 @@ namespace SGE.Test.Repositories
             Assert.Equal(1, count);
         }
 
-        [Fact, TestPriority(1)]
+       [Fact]
         public void UsuarioRepositoryGetOkTest()
         {
             var result = _usuarioRepository.Get().ToList();
 
             Assert.NotNull(result);
             Assert.True(result is List<Usuario>);
+        }
+
+        [Fact]
+        public void UsuarioRepositoryGetByIDTest(){
+            var id = 0;
+            var includes = Enumerable.Empty<string>();
+
+            var result = _usuarioRepository.Get(id, includes);
+
+            Assert.NotNull(result);
+            Assert.True(result is Usuario);
+        }
+
+        [Fact]
+        public void UsuarioRepositoryUpdateTest(){
+            var usuario = new Usuario();
+
+            var result = _usuarioRepository.Update(usuario);
+
+            Assert.NotNull(result);
+            Assert.True(result is Usuario);
+        }
+
+        [Fact]
+        public void UsuarioRepositoryRemoveByIDTest(){
+          var id = 0;
+
+            var result = _usuarioRepository.Remove(id);
+
+            Assert.NotNull(result);
+            Assert.True(result is Usuario);
         }
     }
 }

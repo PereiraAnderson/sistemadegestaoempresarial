@@ -62,7 +62,7 @@ namespace SGE.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostPontos([FromBody] PontoView Ponto)
+        public IActionResult PostPonto([FromBody] PontoView Ponto)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace SGE.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletePontos([FromRoute] long id)
+        public IActionResult DeletePonto([FromRoute] long id)
         {
             try
             {

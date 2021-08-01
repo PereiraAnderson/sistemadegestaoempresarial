@@ -64,7 +64,7 @@ namespace SGE.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostUsuario([FromBody] UsuarioView usuario)
+        public IActionResult PostPonto([FromBody] UsuarioView usuario)
         {
             try
             {

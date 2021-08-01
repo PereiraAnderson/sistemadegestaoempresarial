@@ -15,13 +15,13 @@ using SGE.Infra.Views;
 
 namespace SGE.Test.Controllers
 {
-    public class UsuarioServiceTest
+    public class UsuarioControllerTest
     {
         public bool UsuarioServiceCreated;
 
         private UsuarioController _usuarioController { get; set; }
 
-        public UsuarioServiceTest()
+        public UsuarioControllerTest()
         {
             var usuarioService = CreateUsuarioService();
             _usuarioController = new UsuarioController(null, usuarioService, null);
@@ -38,7 +38,7 @@ namespace SGE.Test.Controllers
                 Senha = "123456"
             };
 
-            var result = _usuarioController.PostUsuario(usuario);
+            var result = _usuarioController.PostPonto(usuario);
 
             Assert.NotNull(result);
             Assert.True(result is CreatedAtActionResult);
