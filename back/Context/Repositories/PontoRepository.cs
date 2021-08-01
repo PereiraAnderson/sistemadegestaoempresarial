@@ -7,10 +7,10 @@ using SGE.Infra.Utils;
 
 namespace SGE.Context.Repositories
 {
-    public class EnderecoRepository : SGERepository<Ponto>, IPontoRepository
+    public class PontoRepository : SGERepository<Ponto>, IPontoRepository
     {
 
-        public EnderecoRepository(SGEDbContext context) : base(context)
+        public PontoRepository(SGEDbContext context) : base(context)
         {
         }
 

@@ -1,6 +1,7 @@
 ENV:=Docker
 MIGRATION:=Initial
 SQLSERVER_VOLUME_NAME:=sge-sqlserver-volume
+TEST_GUID:=null
 
 ###################
 # SQL SERVER
@@ -84,6 +85,18 @@ run-front-it: stop-front
 ###################
 # EXTRA
 ###################
+
+run-test:
+	cd ./xUnitTest && dotnet test --collect:"XPlat Code Coverage"
+
+generate-test-report:
+	reportgenerator \
+		-reports:"/home/anderson/Documents/unifei/ultimo/lina/projeto/xUnitTest/TestResults/$(TEST_GUID)/coverage.cobertura.xml" \
+		-targetdir:"coveragereport" \
+		-reporttypes:Html
+
+open-test-report:
+	firefox coveragereport/index.html
 
 create-network:
 	docker network create sge || exit 0

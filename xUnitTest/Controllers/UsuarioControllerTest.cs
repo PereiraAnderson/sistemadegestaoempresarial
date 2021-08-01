@@ -1,17 +1,17 @@
-using System;
 using Xunit;
 using SGE.Controllers;
 using SGE.Infra.Views.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using SGE.Infra.Enums;
-using SGE.Infra.Views;
 using System.Linq;
-using SGE.Test.Services;
 using SGE.Services.Interfaces;
 using Moq;
 using SGE.Context.Models;
 using System.Collections.Generic;
+using SGE.Infra.Utils;
+using SGE.Infra.Filters;
+using SGE.Infra.Views;
 
 namespace SGE.Test.Controllers
 {
@@ -28,35 +28,17 @@ namespace SGE.Test.Controllers
         }
 
         [Fact]
-        public async void UsuarioControllerPostBadRequestTest()
-        {
-            var usuario = new UsuarioView();
-            var result = await _usuarioController.PostUsuarios(usuario);
-
-            Assert.NotNull(result);
-            Assert.True(result is BadRequestObjectResult);
-
-            var badResponse = result as BadRequestObjectResult;
-
-            Assert.IsType<Erro>(badResponse.Value);
-            Assert.Equal(StatusCodes.Status400BadRequest, badResponse.StatusCode);
-
-            Assert.False(UsuarioServiceCreated);
-        }
-
-        [Fact]
-        public async void UsuarioControllerPostCreatedTest()
+        public void UsuarioControllerPostCreatedTest()
         {
             var usuario = new UsuarioView
             {
                 Perfil = EnumUsuarioPerfil.FUNCIONARIO,
                 Nome = "Usuário Teste",
                 CPF = "111.111.111-11",
-                Email = "teste@teste.com.br",
                 Senha = "123456"
             };
 
-            var result = await _usuarioController.PostUsuarios(usuario);
+            var result = _usuarioController.PostUsuario(usuario);
 
             Assert.NotNull(result);
             Assert.True(result is CreatedAtActionResult);
@@ -70,9 +52,9 @@ namespace SGE.Test.Controllers
         }
 
         [Fact]
-        public void UsuarioControllerGetOkTest()
+        public void UsuarioControllerGetUsuarioOkTest()
         {
-            var id = Guid.NewGuid().ToString();
+            var id = 1;
             var includes = Enumerable.Empty<string>();
 
             var result = _usuarioController.GetUsuario(id, includes);
@@ -88,6 +70,130 @@ namespace SGE.Test.Controllers
             Assert.False(UsuarioServiceCreated);
         }
 
+        [Fact]
+        public void UsuarioControllerGetUsuariosOkTest()
+        {
+            var paginacao = new Paginacao
+            {
+                Pagina = 1,
+                ListaTodos = false,
+                Tamanho = 10
+            };
+            var filtro = new UsuarioFiltro
+            {
+                Ativo = true,
+                CPF = "11111111111",
+                Includes = Enumerable.Empty<string>(),
+                Login = "",
+                Nome = ""
+            };
+            var ordenacao = new Ordenacao
+            {
+                OrdenacaoAsc = true,
+                OrdenaPor = "Id"
+            };
+
+            var result = _usuarioController.GetUsuarios(paginacao, filtro, ordenacao);
+
+            Assert.NotNull(result);
+            Assert.True(result is OkObjectResult);
+
+            var okResponse = result as OkObjectResult;
+
+            Assert.IsType<Paginacao<UsuarioView>>(okResponse.Value);
+            Assert.Equal(StatusCodes.Status200OK, okResponse.StatusCode);
+
+            Assert.False(UsuarioServiceCreated);
+        }
+
+        [Fact]
+        public void UsuarioControllerPutOkTest()
+        {
+            var usuario = new UsuarioView
+            {
+                Perfil = EnumUsuarioPerfil.FUNCIONARIO,
+                Nome = "Usuário Teste",
+                CPF = "111.111.111-11",
+                Senha = "123456"
+            };
+
+            var result = _usuarioController.PutUsuario(usuario);
+
+            Assert.NotNull(result);
+            Assert.True(result is OkObjectResult);
+
+            var okResponse = result as OkObjectResult;
+
+            Assert.IsType<UsuarioView>(okResponse.Value);
+            Assert.Equal(StatusCodes.Status200OK, okResponse.StatusCode);
+
+            Assert.False(UsuarioServiceCreated);
+        }
+
+        [Fact]
+        public void UsuarioControllerPutAlteraSenhaOkTest()
+        {
+            var alterarSenha = new AlterarSenha
+            {
+                Login = "",
+                SenhaAtual = "",
+                SenhaNova = ""
+            };
+
+            var result = _usuarioController.PutUsuarioAlteraSenha(alterarSenha);
+
+            Assert.NotNull(result);
+            Assert.True(result is OkObjectResult);
+
+            var okResponse = result as OkObjectResult;
+
+            Assert.IsType<UsuarioView>(okResponse.Value);
+            Assert.Equal(StatusCodes.Status200OK, okResponse.StatusCode);
+
+            Assert.False(UsuarioServiceCreated);
+        }
+
+        [Fact]
+        public void UsuarioControllerDeleteOkTest()
+        {
+            var id = 0;
+
+            var result = _usuarioController.DeleteUsuario(id);
+
+            Assert.NotNull(result);
+            Assert.True(result is OkObjectResult);
+
+            var okResponse = result as OkObjectResult;
+
+            Assert.IsType<UsuarioView>(okResponse.Value);
+            Assert.Equal(StatusCodes.Status200OK, okResponse.StatusCode);
+
+            Assert.False(UsuarioServiceCreated);
+        }
+
+        [Fact]
+        public void UsuarioControlleLoginOkTest()
+        {
+            var longinIn = new LoginIn
+            {
+                Login = "",
+                Senha = ""
+            };
+
+            var result = _usuarioController.Login(longinIn);
+
+            Assert.NotNull(result);
+            Assert.True(result is OkObjectResult);
+
+            var okResponse = result as OkObjectResult;
+
+            Assert.IsType<LoginOut>(okResponse.Value);
+            Assert.Equal(StatusCodes.Status200OK, okResponse.StatusCode);
+
+            Assert.False(UsuarioServiceCreated);
+        }
+
+
 
         #region Mocks
 
@@ -95,18 +201,55 @@ namespace SGE.Test.Controllers
         {
             var usuarioService = new Mock<IUsuarioService>();
             usuarioService
-                .Setup(x => x.Add(It.IsAny<Usuario>(), It.IsAny<EnumUsuarioPerfil>()))
-                .Callback((Usuario usuario, EnumUsuarioPerfil perfil) =>
+                .Setup(x => x.Add(It.IsAny<Usuario>()))
+                .Callback((Usuario usuario) =>
                     UsuarioServiceCreated = true
                 )
-                .ReturnsAsync((Usuario usuario, EnumUsuarioPerfil perfil) =>
+                .Returns((Usuario usuario) =>
                     new Usuario()
                 );
 
             usuarioService
-                .Setup(x => x.Get(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()))
-                .Returns((string id, IEnumerable<string> includes) =>
+                .Setup(x => x.Update(It.IsAny<Usuario>()))
+                .Returns((Usuario usuario) =>
                     new Usuario()
+                );
+
+            usuarioService
+                .Setup(x => x.Get(It.IsAny<long>(), It.IsAny<IEnumerable<string>>()))
+                .Returns((long id, IEnumerable<string> includes) =>
+                    new Usuario()
+                );
+
+            usuarioService
+                .Setup(x => x.Get(It.IsAny<Paginacao>(), It.IsAny<UsuarioFiltro>(), It.IsAny<Ordenacao>()))
+                .Returns((Paginacao paginacao, UsuarioFiltro filtro, Ordenacao ordenacao) =>
+                    new Paginacao<Usuario>()
+                    {
+                        ListaItens = Enumerable.Repeat(new Usuario(), 1),
+                        NumeroPagina = 1,
+                        TamanhoPagina = 10,
+                        TotalItens = 2,
+                        TotalPaginas = 1
+                    }
+                );
+
+            usuarioService
+                .Setup(x => x.Remove(It.IsAny<long>()))
+                .Returns((long id) =>
+                    new Usuario()
+                );
+
+            usuarioService
+                .Setup(x => x.AlterarSenha(It.IsAny<AlterarSenha>()))
+                .Returns((AlterarSenha alterarSenha) =>
+                    new Usuario()
+                );
+
+            usuarioService
+                .Setup(x => x.Login(It.IsAny<LoginIn>()))
+                .Returns((LoginIn loginIn) =>
+                    new LoginOut()
                 );
 
             return usuarioService.Object;

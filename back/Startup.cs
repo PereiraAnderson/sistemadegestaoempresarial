@@ -12,9 +12,11 @@ using SGE.Context.Repositories.Interfaces;
 using SGE.Context.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SGE
 {
+    [ExcludeFromCodeCoverage]
     public class StartupMigration
     {
         public IConfiguration _configuration { get; }
@@ -31,6 +33,7 @@ namespace SGE
         }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         readonly IConfiguration _configuration;
@@ -59,7 +62,7 @@ namespace SGE
             services.AddDbContext<SGEDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("SqlServerSGE")));
 
-            services.AddTransient<IPontoRepository, EnderecoRepository>();
+            services.AddTransient<IPontoRepository, PontoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             services.AddTransient<IPontoService, PontoService>();
