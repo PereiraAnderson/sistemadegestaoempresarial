@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -5,8 +6,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace SGE.Context
 {
-    public class DesignTimeDbContextFactory :
-        IDesignTimeDbContextFactory<SGEDbContext>
+    [ExcludeFromCodeCoverage]
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<SGEDbContext>
     {
         public SGEDbContext CreateDbContext(string[] args)
         {

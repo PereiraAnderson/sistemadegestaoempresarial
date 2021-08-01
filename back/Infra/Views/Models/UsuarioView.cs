@@ -1,4 +1,3 @@
-using System;
 using SGE.Infra.Enums;
 
 namespace SGE.Infra.Views.Models

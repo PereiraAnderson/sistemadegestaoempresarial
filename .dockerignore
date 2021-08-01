@@ -9,6 +9,7 @@
 # Back and xUnitTest
 **/bin
 **/obj
+**/converagereport
 
 # Front
 **/dist

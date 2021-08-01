@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace SGE.Infra.Views
 {
+    [ExcludeFromCodeCoverage]
     public class AlterarSenha
     {
         public string Login { get; set; }

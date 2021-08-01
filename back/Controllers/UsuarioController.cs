@@ -106,7 +106,7 @@ namespace SGE.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUsuarios([FromRoute] long id)
+        public IActionResult DeleteUsuario([FromRoute] long id)
         {
             try
             {

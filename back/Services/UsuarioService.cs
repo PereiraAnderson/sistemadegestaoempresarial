@@ -14,18 +14,9 @@ namespace SGE.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _repo;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IConfiguration _configuration;
-        private readonly IPontoService _pontoService;
 
-        public UsuarioService(IUsuarioRepository repo, IPontoService pontoService,
-            IServiceProvider serviceProvider, IConfiguration configuration)
-        {
+        public UsuarioService(IUsuarioRepository repo) =>
             _repo = repo;
-            _serviceProvider = serviceProvider;
-            _pontoService = pontoService;
-            _configuration = configuration;
-        }
 
         public IEnumerable<Usuario> Get(UsuarioFiltro filtro = null, Ordenacao ordenacao = null) =>
             _repo.Get(filtro, ordenacao).AsEnumerable();
@@ -39,8 +30,8 @@ namespace SGE.Services
         public Usuario GetByCPF(string cpf, IEnumerable<string> includes = null) =>
             _repo.GetByCPF(cpf, includes);
 
-        public Usuario GetByLogin(string email, IEnumerable<string> includes = null) =>
-            _repo.GetByLogin(email, includes);
+        public Usuario GetByLogin(string login, IEnumerable<string> includes = null) =>
+            _repo.GetByLogin(login, includes);
 
         public Usuario Add(Usuario usuario)
         {
@@ -95,7 +86,7 @@ namespace SGE.Services
             if (usuario == null)
                 throw new Exception("Login e/ou senha incorreta");
 
-            var correta = BCrypt.Net.BCrypt.Verify(usuario.Senha, alterarSenha.SenhaAtual);
+            var correta = BCrypt.Net.BCrypt.Verify(alterarSenha.SenhaAtual, usuario.Senha);
             if (!correta)
                 throw new Exception("Login e/ou senha incorreta");
 

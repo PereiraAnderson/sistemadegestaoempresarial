@@ -5,6 +5,5 @@ namespace SGE.Infra.Filters
         public string CPF { get; set; }
         public string Nome { get; set; }
         public string Login { get; set; }
-        public long? InquilinoId { get; set; }
     }
 }

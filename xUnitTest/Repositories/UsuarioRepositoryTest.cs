@@ -9,7 +9,6 @@ namespace SGE.Test.Repositories
     [TestCaseOrderer("SGE.Test.Utils.PriorityOrderer", "UsuarioRepositoryTest")]
     public class UsuarioRepositoryTest
     {
-
         private UsuarioRepository _usuarioRepository { get; set; }
 
         public UsuarioRepositoryTest()
@@ -22,15 +21,17 @@ namespace SGE.Test.Repositories
         [Fact, TestPriority(0)]
         public void UsuarioRepositoryAddOkTest()
         {
-            var usuario = new Usuario()
+            var usuario = new Usuario
             {
                 CPF = "111.111.111-11"
             };
 
             var result = _usuarioRepository.Add(usuario);
+            var count = _usuarioRepository.SaveChanges();
 
             Assert.NotNull(result);
             Assert.True(result is Usuario);
+            Assert.Equal(1, count);
         }
 
         [Fact, TestPriority(1)]
