@@ -3,6 +3,20 @@
 // html, body { height: 100%; }
 // body { margin: 0; font-family: 'Roboto', sans-serif; }
 
+html, body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+::-moz-selection {
+    color: #FFFFFF;
+    background: #363636;
+  }
+  
+  ::selection {
+    color: #FFFFFF;
+    background: #363636;
+  }
+
 table { width: 99%; }
 
 .float-right { float: right;}
@@ -35,4 +49,114 @@ table { width: 99%; }
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/*
+a, a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+*/
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.menu {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 18%;
+    min-height: 90%;
+    border-right: 1px solid #D3D3D3;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-links {
+    text-transform: uppercase;
+    margin-top: 50px;
+}
+
+.menu-link-item {
+    margin-bottom: 20px;
+}
+
+.inner-sidebar {
+    position: absolute;
+    top: 10%;
+    left: 18%;
+    width: 22%;
+    min-height: 90%;
+    border-right: 1px solid #D3D3D3;
+    display: flex;
+    justify-content: center;
+}
+
+.main-content {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 60%;
+    min-height: 90%;
+    background-color: #F7F7F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content-elements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content-elements .start.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    background: #23B6CA;
+    box-shadow: 0px 2px 39px 11px rgba(0, 0, 0, 0.13);
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 12%;
+}
+
+.main-date {
+    font-size: 1.2rem;
+    font-weight: normal;
+    line-height: 29px;
+    color: #2D2D2D;
+    text-transform: uppercase;
+    margin-bottom: 2%;
+}
+
+.main-time {
+    font-weight: bold;
+    font-size: 4.8rem;
+    line-height: 98px;
+    text-align: center;
+    color: #2D2D2D;
+    margin-bottom: 8%;
+}
+
+.main-task input[type="text"] {
+    color: #919191;
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #B0B0B0;
+    padding: 5%;
+    width: 350px;
+}
+
+.main-task input:focus {
+    outline: none;
 }
