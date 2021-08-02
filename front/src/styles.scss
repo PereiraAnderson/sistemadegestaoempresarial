@@ -50,11 +50,21 @@ table { width: 99%; }
     align-items: center;
     justify-content: center;
 }
-/*
-a, a:link, a:visited, a:hover, a:active {
+
+.menu-links a, .menu-links a:link, .menu-links a:visited, .menu-links a:active {
     text-decoration: none;
+    color: #2D2D2D;
 }
-*/
+
+.menu-links a:hover {
+    text-decoration: none;
+    color: #23B6CA;
+}
+
+a.this-page {
+    font-weight: bold;
+}
+
 .topbar {
     position: absolute;
     top: 0;
@@ -93,6 +103,35 @@ a, a:link, a:visited, a:hover, a:active {
     border-right: 1px solid #D3D3D3;
     display: flex;
     justify-content: center;
+}
+
+.inner-sidebar-content {
+    width: 80%;
+}
+
+.inner-sidebar-date {
+    margin-top: 40px;
+    color: #2D2D2D;
+    font-size: 1.2rem;
+}
+
+.inner-sidebar-card {
+    margin-top: 30px;
+    padding: 20px 40px;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+}
+
+.inner-sidebar-card-time {
+    color: #2D2D2D;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.inner-sidebar-card-task {
+    color: #443a3a;
+    font-size: 1.1rem;
 }
 
 .main-content {
