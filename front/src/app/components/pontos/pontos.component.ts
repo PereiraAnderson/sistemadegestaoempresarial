@@ -1,7 +1,9 @@
 import { HttpParams } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
 import { PontoService } from 'src/app/api-services/ponto.service';
+import { Login } from 'src/app/models/login';
 import { Ponto } from 'src/app/models/ponto';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-pontos',
@@ -16,7 +18,14 @@ export class PontosComponent implements AfterViewInit {
   isLoadingResults = true;
   isError = false;
 
-  constructor(private pontoService: PontoService) { }
+  login: Login;
+
+  constructor(
+    private pontoService: PontoService,
+    private sessionService: SessionService
+  ) {
+    this.login = this.sessionService.getLogin();
+  }
 
   ngAfterViewInit() {
     this.get();
@@ -27,7 +36,8 @@ export class PontosComponent implements AfterViewInit {
 
     const params = new HttpParams()
       .set("OrdenaPor", "Data")
-      .set("OrdenacaoAsc", "false");
+      .set("OrdenacaoAsc", "false")
+      .set('UsuarioId', this.login.id.toString());
 
     this.pontoService.get({ params })
       .then((data: any) => {
@@ -39,6 +49,8 @@ export class PontosComponent implements AfterViewInit {
         this.isLoadingResults = false;
         this.isError = true;
       });
+
+    this.pontoService.geraRelatorio(this.login.id);
   }
 
   delete(id: number) {

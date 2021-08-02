@@ -38,6 +38,11 @@ namespace SGE.Extensions
             if (filtro != null)
             {
                 query = query.AplicaGenericFilter(filtro);
+
+                if (filtro.UsuarioId != null)
+                {
+                    query = query.Where(x => x.UsuarioId == filtro.UsuarioId);
+                }
             }
 
             return query;

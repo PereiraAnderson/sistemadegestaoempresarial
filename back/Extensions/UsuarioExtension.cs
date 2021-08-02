@@ -46,7 +46,7 @@ namespace SGE.Extensions
                     query = query.Where(x => x.CPF.Contains(filtro.CPF));
 
                 if (!string.IsNullOrWhiteSpace(filtro.Login))
-                    query = query.Where(x => x.Login.Contains(filtro.Login));
+                    query = query.Where(x => x.Login.Equals(filtro.Login));
 
                 if (!string.IsNullOrWhiteSpace(filtro.Nome))
                     query = query.Where(x => x.Nome.Contains(filtro.Nome));

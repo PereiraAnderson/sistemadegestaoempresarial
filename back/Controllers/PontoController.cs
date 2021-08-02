@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SGE.Controllers.Utils;
@@ -54,6 +53,20 @@ namespace SGE.Controllers
             {
                 var result = _service.Get(id, includes);
                 return Ok(result.ToView());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new Erro { Mensagem = e.Message, Detalhes = e.InnerException?.Message }); ;
+            }
+        }
+
+        [HttpGet("relatorio/{usuarioId}")]
+        public IActionResult GetRelatorio([FromRoute] long usuarioId)
+        {
+            try
+            {
+                var result = _service.GeraRelatorio(usuarioId);
+                return Ok(result);
             }
             catch (Exception e)
             {
