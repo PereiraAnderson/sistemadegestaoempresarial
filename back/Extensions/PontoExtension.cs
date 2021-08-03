@@ -12,6 +12,7 @@ namespace SGE.Extensions
             var model = new Ponto
             {
                 Data = view.Data,
+                Tarefa = view.Tarefa,
                 UsuarioId = view.UsuarioId
             };
 
@@ -24,6 +25,7 @@ namespace SGE.Extensions
             var view = new PontoView
             {
                 Data = model.Data,
+                Tarefa = model.Tarefa,
                 UsuarioId = model.UsuarioId,
                 Usuario = model.Usuario?.ToView()
             };
@@ -39,10 +41,11 @@ namespace SGE.Extensions
             {
                 query = query.AplicaGenericFilter(filtro);
 
-                if (filtro.UsuarioId != null)
-                {
+                if (filtro.UsuarioId.HasValue)
                     query = query.Where(x => x.UsuarioId == filtro.UsuarioId);
-                }
+
+                if (filtro.Hoje.HasValue)
+                    query = query.Where(x => x.Data.Date.CompareTo(System.DateTime.Today) == 0);
             }
 
             return query;

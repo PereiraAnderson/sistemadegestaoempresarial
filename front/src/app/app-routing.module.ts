@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuardService] },
   { path: 'usuarios/:id', component: UsuarioComponent, canActivate: [AuthGuardService] },
   { path: 'pontos', component: PontosComponent, canActivate: [AuthGuardService] },
-  { path: 'pontos/:id', component: PontoComponent, canActivate: [AuthGuardService] }
+  { path: 'ponto', component: PontoComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

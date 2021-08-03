@@ -11,5 +11,7 @@ namespace SGE.Infra.Views.Models
         [Required]
         public long UsuarioId { get; set; }
         public UsuarioView Usuario { get; set; }
+
+        public string Tarefa { get; set; }
     }
 }

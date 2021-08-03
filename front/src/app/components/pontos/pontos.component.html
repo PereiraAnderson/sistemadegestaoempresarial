@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col">
         <a class="float-right" [routerLink]="['/pontos', 0]" mat-raised-button color='primary'>Novo
             Ponto</a>
@@ -37,4 +37,20 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
+</div> -->
+<div class="inner-sidebar">
+    <div *ngFor="let p of data" class="inner-sidebar-content">
+        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
+        <div class="inner-sidebar-card">
+            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
+            <div class="inner-sidebar-card-task">{{p.tarefa}}</div>
+        </div>
+    </div>
 </div>
+<!-- <div *ngIf="relatorio">
+    <div *ngFor="let p of relatorio.pontos">
+        <div class="inner-sidebar-date">Entrada: {{ p.entrada | date: 'HH:mm:ss'}}</div>
+        <div class="inner-sidebar-date">Saída: {{ p.saida | date: 'HH:mm:ss'}}</div>
+        <div class="inner-sidebar-date">Saldo: {{ p.saldo | date: 'HH:mm:ss'}}</div>
+    </div>
+</div> -->

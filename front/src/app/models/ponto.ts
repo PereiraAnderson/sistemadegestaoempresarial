@@ -3,6 +3,7 @@ import { Usuario } from './usuario';
 
 export class Ponto extends GenericModel {
     data: any;
+    tarefa: string;
 
     usuarioId: number;
     usuario: Usuario;
@@ -12,6 +13,7 @@ export class Ponto extends GenericModel {
 
         if (item) {
             this.data = new Date(item.data).toISOString();
+            this.tarefa = item.tarefa;
             this.usuarioId = item.usuarioId;
 
             if (item.usuario)

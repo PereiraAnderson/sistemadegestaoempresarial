@@ -1,4 +1,4 @@
-<app-toolbar></app-toolbar>
+<!-- <app-toolbar></app-toolbar>
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened disableClose>
         <mat-list>
@@ -19,4 +19,26 @@
     <mat-sidenav-content>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<!-- <div class="topbar">
+</div> -->
+<div class="menu">
+    <div class="menu-links">
+        <div class="menu-link-item">
+            <a *ngIf="perfil == 3" routerLink="/ponto">
+                <span>Novo Ponto</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a *ngIf="perfil == 3" routerLink="/pontos">
+                <span>Registros Anteriores</span>
+            </a>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
+<!-- <div class="main-content">
+    <app-ponto></app-ponto>
+    <router-outlet></router-outlet>
+</div> -->

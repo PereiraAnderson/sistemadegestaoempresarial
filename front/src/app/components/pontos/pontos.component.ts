@@ -1,8 +1,10 @@
 import { HttpParams } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PontoService } from 'src/app/api-services/ponto.service';
 import { Login } from 'src/app/models/login';
 import { Ponto } from 'src/app/models/ponto';
+import { RelatorioPonto } from 'src/app/models/relatorioPonto';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -19,10 +21,12 @@ export class PontosComponent implements AfterViewInit {
   isError = false;
 
   login: Login;
+  relatorio: RelatorioPonto;
 
   constructor(
     private pontoService: PontoService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) {
     this.login = this.sessionService.getLogin();
   }
@@ -34,10 +38,13 @@ export class PontosComponent implements AfterViewInit {
   get() {
     this.isLoadingResults = true;
 
-    const params = new HttpParams()
+    var params = new HttpParams()
       .set("OrdenaPor", "Data")
       .set("OrdenacaoAsc", "false")
-      .set('UsuarioId', this.login.id.toString());
+      .set('UsuarioId', '5');
+
+    if (this.router.url.endsWith("ponto"))
+      params = params.set('Hoje', 'true');
 
     this.pontoService.get({ params })
       .then((data: any) => {
@@ -50,7 +57,11 @@ export class PontosComponent implements AfterViewInit {
         this.isError = true;
       });
 
-    this.pontoService.geraRelatorio(this.login.id);
+    this.pontoService.geraRelatorio(5)
+      .then((data) => {
+        debugger;
+        this.relatorio = data.response;
+      });
   }
 
   delete(id: number) {

@@ -14,5 +14,7 @@ namespace SGE.Context.Models
         public long UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
+        public string Tarefa { get; set; }
+
     }
 }

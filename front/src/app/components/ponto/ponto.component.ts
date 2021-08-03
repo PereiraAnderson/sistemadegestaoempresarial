@@ -16,6 +16,7 @@ export class PontoComponent implements OnInit {
   ponto: Ponto;
   acao: string;
   login: Login;
+  agora: Date;
 
   color: ThemePalette = 'primary';
 
@@ -25,6 +26,10 @@ export class PontoComponent implements OnInit {
     private pontoService: PontoService,
     private sessionService: SessionService) {
     this.login = this.sessionService.getLogin();
+    this.ponto = new Ponto();
+    setInterval(() => {
+      this.agora = new Date();
+    }, 1000);
   }
 
   ngOnInit() {
@@ -46,8 +51,8 @@ export class PontoComponent implements OnInit {
   }
 
   onSubmit() {
-    const dt = new Date(this.ponto.data);
-    this.ponto.data = new Date(dt.getTime()).toISOString();
+    const dt = new Date();
+    this.ponto.data = dt.toISOString();
 
     if (this.login.perfil != EnumUsuarioPerfil.SGE)
       this.ponto.usuarioId = this.login.id;
