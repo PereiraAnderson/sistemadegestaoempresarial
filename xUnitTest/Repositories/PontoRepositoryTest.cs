@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace SGE.Test.Repositories
 {
-    [TestCaseOrderer("SGE.Test.Utils.PriorityOrderer", "PontoRepositoryTest")]
     public class PontoRepositoryTest
     {
         private PontoRepository _pontoRepository { get; set; }
@@ -35,42 +34,57 @@ namespace SGE.Test.Repositories
             Assert.Equal(1, count);
         }
 
-       [Fact]
+        [Fact]
         public void PontoRepositoryGetListTest()
         {
             var result = _pontoRepository.Get().ToList();
 
             Assert.NotNull(result);
             Assert.True(result is List<Ponto>);
+            Assert.NotEmpty(result);
         }
 
         [Fact]
-        public void PontoRepositoryGetByID(){
-            var id = 0;
+        public void PontoRepositoryGetByID()
+        {
+            var id = 1L;
             var includes = Enumerable.Empty<string>();
 
             var result = _pontoRepository.Get(id, includes);
 
             Assert.NotNull(result);
             Assert.True(result is Ponto);
+            Assert.Equal(1, result.Id);
         }
+
         [Fact]
-        public void PontoRepositoryUpdate(){
-            var ponto = new Ponto();
+        public void PontoRepositoryUpdate()
+        {
+            var id = 1L;
+            var includes = Enumerable.Empty<string>();
+            var ponto = _pontoRepository.Get(id, includes);
+            ponto.Ativo = false;
 
             var result = _pontoRepository.Update(ponto);
+            var count = _pontoRepository.SaveChanges();
 
             Assert.NotNull(result);
             Assert.True(result is Ponto);
+            Assert.Equal(1, count);
+            Assert.False(result.Ativo);
         }
-        [Fact]
-        public void PontoRepositoryRemove(){
-          var id = 0;
 
+        [Fact]
+        public void PontoRepositoryRemove()
+        {
+            var id = 1L;
             var result = _pontoRepository.Remove(id);
+            var count = _pontoRepository.SaveChanges();
 
             Assert.NotNull(result);
             Assert.True(result is Ponto);
+            Assert.Equal(1, count);
+            Assert.False(result.Ativo);
         }
     }
 }

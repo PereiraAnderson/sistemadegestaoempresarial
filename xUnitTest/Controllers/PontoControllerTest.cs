@@ -3,7 +3,6 @@ using SGE.Controllers;
 using SGE.Infra.Views.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using SGE.Infra.Enums;
 using System.Linq;
 using SGE.Services.Interfaces;
 using Moq;
@@ -11,7 +10,6 @@ using SGE.Context.Models;
 using System.Collections.Generic;
 using SGE.Infra.Utils;
 using SGE.Infra.Filters;
-using SGE.Infra.Views;
 
 namespace SGE.Test.Controllers
 {
@@ -33,7 +31,7 @@ namespace SGE.Test.Controllers
             var ponto = new PontoView
             {
                 Data = System.DateTimeOffset.Now,
-                
+
             };
 
             var result = _pontoController.PostPonto(ponto);
@@ -120,7 +118,7 @@ namespace SGE.Test.Controllers
             Assert.False(PontoServiceCreated);
         }
 
-    
+
         [Fact]
         public void PontoControllerDeleteOkTest()
         {

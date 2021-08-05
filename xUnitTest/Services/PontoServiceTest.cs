@@ -7,7 +7,6 @@ using Moq;
 using System.Collections.Generic;
 using SGE.Infra.Utils;
 using SGE.Infra.Filters;
-using SGE.Infra.Views;
 
 namespace SGE.Test.Services
 {
@@ -36,33 +35,7 @@ namespace SGE.Test.Services
             Assert.True(result is Ponto);
             Assert.False(PontoRepositoryCreated);
         }
-/*
-        [Fact]
-        public void PontoServiceGetByCpfTest()
-        {
-            var cpf = "00000000000";
-            var includes = Enumerable.Empty<string>();
 
-            var result = _pontoService.GetByCPF(cpf, includes);
-
-            Assert.NotNull(result);
-            Assert.True(result is Ponto);
-            Assert.False(PontoRepositoryCreated);
-        }
-
-        [Fact]
-        public void PontoServiceGetByLoginTest()
-        {
-            var login = "";
-            var includes = Enumerable.Empty<string>();
-
-            var result = _pontoService.GetByLogin(login, includes);
-
-            Assert.NotNull(result);
-            Assert.True(result is Ponto);
-            Assert.False(PontoRepositoryCreated);
-        }
-*/
         [Fact]
         public void PontoServiceGetListTest()
         {
@@ -147,22 +120,7 @@ namespace SGE.Test.Services
                 .Returns((long id, IEnumerable<string> includes) =>
                     new Ponto()
                 );
-/*
-            pontoRepository
-                .Setup(x => x.GetByCPF(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()))
-                .Returns((string cpf, IEnumerable<string> includes) =>
-                    new Ponto()
-                );
 
-            pontoRepository
-                .Setup(x => x.GetByLogin(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()))
-                .Returns((string login, IEnumerable<string> includes) =>
-                    new Ponto
-                    {
-                        Senha = "$2a$11$llgzqoCJoRHxX00w3rqdwO8yN1/xvq1w.UERLsN4KjTFo/2Dvk3mS"
-                    }
-                );
-*/
             pontoRepository
                 .Setup(x => x.Get(It.IsAny<Paginacao>(), It.IsAny<PontoFiltro>(), It.IsAny<Ordenacao>()))
                 .Returns((Paginacao paginacao, PontoFiltro pontoFiltro, Ordenacao ordenacao) =>

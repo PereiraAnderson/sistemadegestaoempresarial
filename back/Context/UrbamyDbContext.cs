@@ -7,6 +7,7 @@ namespace SGE.Context
     public class SGEDbContext : DbContext
     {
         public DbSet<Ponto> Ponto { get; set; }
+        public DbSet<Requerimento> Requerimento { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 
         public SGEDbContext(DbContextOptions options) : base(options) { }
@@ -16,6 +17,7 @@ namespace SGE.Context
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new UsuarioConfiguration());
+            builder.ApplyConfiguration(new RequerimentoConfiguration());
         }
     }
 }
