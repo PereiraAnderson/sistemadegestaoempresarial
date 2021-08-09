@@ -1,15 +1,15 @@
 export class PontoNormalizado {
     entrada: Date;
     saida: Date;
-    saldo: Date;
-    tarefa: string;
+    jornadaString: string;
+    tarefas: string;
 
     constructor(item?) {
         if (item) {
-            this.entrada = item.entrada;
-            this.saida = item.saida;
-            this.saldo = item.saldo;
-            this.tarefa = item.tarefa;
+            this.entrada = new Date(item.entrada);
+            this.saida = new Date(item.saida);
+            this.jornadaString = item.jornadaString;
+            this.tarefas = item.tarefas;
         }
     }
 }

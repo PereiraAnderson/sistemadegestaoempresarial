@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PontoService } from 'src/app/api-services/ponto.service';
-import { EnumUsuarioPerfil } from 'src/app/models/enums/enumUsuarioPerfil';
 import { Login } from 'src/app/models/login';
 import { Ponto } from 'src/app/models/ponto';
 import { SessionService } from 'src/app/services/session.service';
 import { ThemePalette } from '@angular/material/core';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-ponto',
@@ -14,6 +14,7 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class PontoComponent implements OnInit {
   ponto: Ponto;
+  pontos: Ponto[];
   acao: string;
   login: Login;
   agora: Date;
@@ -21,10 +22,10 @@ export class PontoComponent implements OnInit {
   color: ThemePalette = 'primary';
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private pontoService: PontoService,
     private sessionService: SessionService) {
+    this.agora = new Date();
     this.login = this.sessionService.getLogin();
     this.ponto = new Ponto();
     setInterval(() => {
@@ -33,29 +34,25 @@ export class PontoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      const id = params['id'];
-      if (id != 0) {
-        this.pontoService.getById(id)
-          .then((data) => {
-            this.ponto = new Ponto(data);
-          });
-        this.acao = 'Editar';
-      }
-      else {
-        this.ponto = new Ponto();
-        this.ponto.data = new Date();
-        this.onSubmit();
-      }
-    });
+    var params = new HttpParams()
+      .set("OrdenaPor", "Data")
+      .set("OrdenacaoAsc", "false")
+      .set('UsuarioId', this.login.id.toString())
+      .set('Hoje', 'true');
+
+    this.pontoService.get({ params })
+      .then((data: any) => {
+        this.pontos = data.listaItens.map(x => new Ponto(x));
+      })
+      .catch(() => {
+      });
   }
 
   onSubmit() {
     const dt = new Date();
     this.ponto.data = dt.toISOString();
 
-    if (this.login.perfil != EnumUsuarioPerfil.SGE)
-      this.ponto.usuarioId = this.login.id;
+    this.ponto.usuarioId = this.login.id;
 
     this.pontoService.save(this.ponto)
       .then(() => this.router.navigate(['/pontos']));

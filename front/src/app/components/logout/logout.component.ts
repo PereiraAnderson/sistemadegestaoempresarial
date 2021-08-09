@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class LogoutComponent {
 
   constructor(
     private sessionService: SessionService,
     private router: Router,
     private eventEmitterService: EventEmitterService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
+    this.logout();
   }
 
   logout(): void {
@@ -24,5 +23,4 @@ export class ToolbarComponent implements OnInit {
     this.eventEmitterService.refresh();
     this.router.navigate(['/login']);
   }
-
 }

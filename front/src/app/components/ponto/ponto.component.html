@@ -12,30 +12,45 @@
             </a>
         </div>
         <div class="menu-link-item">
-            <a routerLink="/">
+            <a routerLink="/banco">
                 <span>Banco de Horas</span>
             </a>
         </div>
         <div class="menu-link-item">
-            <a routerLink="/">
+            <a routerLink="/requerimentos">
+                <span>Meus requerimentos</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/requerimento">
+                <span>Novo requerimento</span>
+            </a>
+        </div>
+        <div *ngIf="login.perfil == 1" class="menu-link-item">
+            <a routerLink="/usuarios">
+                <span>Usuários</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/usuario">
                 <span>Editar Perfil</span>
             </a>
         </div>
         <div class="menu-link-item">
-            <a routerLink="/">
+            <a routerLink="/logout">
                 <span>Sair</span>
             </a>
         </div>
     </div>
 </div>
 <div class="inner-sidebar">
-    <!--<div *ngFor="let p of data" class="inner-sidebar-content">
+    <div *ngFor="let p of pontos" class="inner-sidebar-content">
         <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
         <div class="inner-sidebar-card">
             <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
             <div class="inner-sidebar-card-task">{{p.tarefa}}</div>
         </div>
-    </div>-->
+    </div>
 </div>
 <div class="main-content">
     <div class="main-content-elements">
@@ -46,5 +61,4 @@
             <input type="text" [(ngModel)]="ponto.tarefa" placeholder="Inserir tarefa associada..." />
         </div>
     </div>
-    >>>>>>> front
 </div>

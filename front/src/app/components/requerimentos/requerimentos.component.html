@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="menu-link-item">
-            <a class="this-page" routerLink="/pontos">
+            <a routerLink="/pontos">
                 <span>Ver Registros</span>
             </a>
         </div>
@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="menu-link-item">
-            <a routerLink="/requerimentos">
+            <a class="this-page" routerLink="/requerimentos">
                 <span>Meus requerimentos</span>
             </a>
         </div>
@@ -26,12 +26,12 @@
                 <span>Novo requerimento</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil == 1" class="menu-link-item">
             <a routerLink="/usuarios">
                 <span>Usuários</span>
             </a>
         </div>
-        <div *ngIf="login.perfil == 1" class="menu-link-item">
+        <div class="menu-link-item">
             <a routerLink="/usuario">
                 <span>Editar Perfil</span>
             </a>
@@ -44,11 +44,13 @@
     </div>
 </div>
 <div class="main-content-full">
-    <div *ngFor="let p of pontos" class="inner-sidebar-content">
-        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
+    <div *ngFor="let r of requerimentos" class="inner-sidebar-content">
+        <div class="inner-sidebar-date">Requerido: {{ r.dataCriacao | date: 'dd/MM/yyyy'}}</div>
         <div class="inner-sidebar-card">
-            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
-            <div class="inner-sidebar-card-task">{{ p.tarefa }}</div>
+            <div class="inner-sidebar-card-task">Status: {{ r.statusString }}</div>
+            <div class="inner-sidebar-card-task">Apontamento atual: {{ r.ponto.data | date: 'dd/MM/yyyy HH:mm:ss'}}
+            </div>
+            <div class="inner-sidebar-card-task">justificativa: {{ r.justificativa }}</div>
         </div>
     </div>
 </div>

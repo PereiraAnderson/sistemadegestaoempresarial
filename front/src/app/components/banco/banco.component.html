@@ -7,12 +7,12 @@
             </a>
         </div>
         <div class="menu-link-item">
-            <a class="this-page" routerLink="/pontos">
+            <a routerLink="/pontos">
                 <span>Ver Registros</span>
             </a>
         </div>
         <div class="menu-link-item">
-            <a routerLink="/banco">
+            <a class="this-page" routerLink="/banco">
                 <span>Banco de Horas</span>
             </a>
         </div>
@@ -26,12 +26,12 @@
                 <span>Novo requerimento</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil == 1" class="menu-link-item">
             <a routerLink="/usuarios">
                 <span>Usuários</span>
             </a>
         </div>
-        <div *ngIf="login.perfil == 1" class="menu-link-item">
+        <div class="menu-link-item">
             <a routerLink="/usuario">
                 <span>Editar Perfil</span>
             </a>
@@ -42,13 +42,15 @@
             </a>
         </div>
     </div>
-</div>
+</div>|
 <div class="main-content-full">
-    <div *ngFor="let p of pontos" class="inner-sidebar-content">
-        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
-        <div class="inner-sidebar-card">
-            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
-            <div class="inner-sidebar-card-task">{{ p.tarefa }}</div>
+    <div *ngIf="relatorio">
+        <p>Saldo Total: {{ relatorio.saldoString }}</p>
+        <div style="border: 3px; border-style: double;" *ngFor="let p of relatorio.pontos">
+            <div class="inner-sidebar-date">Entrada: {{ p.entrada | date: 'HH:mm:ss'}}</div>
+            <div class="inner-sidebar-date">Saída: {{ p.saida | date: 'HH:mm:ss'}}</div>
+            <div class="inner-sidebar-date">Jornada: {{ p.jornadaString }}</div>
+            <div class="inner-sidebar-date">Tarefa: {{ p.tarefas }}</div>
         </div>
     </div>
 </div>

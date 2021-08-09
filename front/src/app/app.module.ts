@@ -11,7 +11,7 @@ import { AppMaterialModule } from './modules/app.material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AuthInterceptor } from './services/auth.interceptor';
@@ -30,6 +30,9 @@ import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);
 import { LOCALE_ID } from '@angular/core';
+import { BancoComponent } from './components/banco/banco.component';
+import { RequerimentoComponent } from './components/requerimento/requerimento.component';
+import { RequerimentosComponent } from './components/requerimentos/requerimentos.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -37,14 +40,17 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
+    LogoutComponent,
     LoginComponent,
     HomeComponent,
     CadastroUsuarioComponent,
     UsuariosComponent,
     UsuarioComponent,
     PontosComponent,
-    PontoComponent
+    PontoComponent,
+    BancoComponent,
+    RequerimentoComponent,
+    RequerimentosComponent
   ],
   imports: [
     CommonModule,
