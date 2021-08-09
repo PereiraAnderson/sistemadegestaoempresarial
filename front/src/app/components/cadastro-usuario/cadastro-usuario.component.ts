@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/api-services/usuario.service';
 import { EnumUsuarioPerfil } from 'src/app/models/enums/enumUsuarioPerfil';
+import { Login } from 'src/app/models/login';
 import { Usuario } from 'src/app/models/usuario';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -12,12 +14,15 @@ import { Usuario } from 'src/app/models/usuario';
 export class CadastroUsuarioComponent implements OnInit {
   usuario: Usuario;
   acao: string;
+  login: Login;
 
   constructor(
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private sessionService: SessionService
   ) {
     this.usuario = new Usuario();
+    this.login = this.sessionService.getLogin();
   }
 
   ngOnInit() {
@@ -27,6 +32,6 @@ export class CadastroUsuarioComponent implements OnInit {
   onSubmit() {
     this.usuario.perfil = EnumUsuarioPerfil.FUNCIONARIO;
     this.usuarioService.save(this.usuario)
-      .then(() => this.router.navigate(['/login']));
+      .then(() => this.router.navigate(['/usuarios']));
   }
 }

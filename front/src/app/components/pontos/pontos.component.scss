@@ -6,4 +6,34 @@
 .mat-column-actions {
     max-width: 40px;
 }
-  
+
+.main-content-elements {
+    width: 100%;
+}
+
+.inner-sidebar-card {
+    margin-top: 2%;
+    padding: 3% 3%;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+
+.inner-sidebar-date {
+    margin-top: 5%;
+    color: #2D2D2D;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.inner-sidebar-card-time {
+    color: #2D2D2D;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+.inner-sidebar-card-task {
+    color: #443a3a;
+    font-size: 1.2rem;
+}

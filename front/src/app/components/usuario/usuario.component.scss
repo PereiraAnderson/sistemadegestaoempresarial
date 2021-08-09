@@ -1,3 +1,35 @@
-mat-form-field{
+mat-card {
+    min-height: 90vh;
+    min-width: 90%;
+}
+
+mat-card-title, input, button {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+mat-card-title {
+    font-weight: bold;
+    color: #2D2D2D;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+mat-form-field {
     display: block;
+}
+
+mat-form-field input {
+    padding: 5px;
+}
+
+.b-save.mat-button {
+    width: 100%;
+    margin-top: 5%;
+    padding: 5px 0px;
+    border-radius: 5px;
+    background-color: #23b6ca;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }

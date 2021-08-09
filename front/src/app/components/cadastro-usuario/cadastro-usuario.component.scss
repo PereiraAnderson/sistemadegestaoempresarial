@@ -3,7 +3,7 @@ mat-card {
     min-width: 90%;
 }
 
-mat-card-title, input, button {
+mat-card-title, input, button, a {
     font-family: 'Open Sans', sans-serif !important;
 }
 
@@ -32,4 +32,13 @@ mat-form-field input {
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+a.b-back {
+    color: #23b6ca;
+}
+
+a.b-back:hover {
+    color: #2D2D2D;
+    text-decoration: none;
 }

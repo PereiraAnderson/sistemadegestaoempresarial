@@ -55,6 +55,6 @@ export class PontoComponent implements OnInit {
     this.ponto.usuarioId = this.login.id;
 
     this.pontoService.save(this.ponto)
-      .then(() => this.router.navigate(['/pontos']));
+      .then(() => this.router.navigate(['/ponto']));
   }
 }

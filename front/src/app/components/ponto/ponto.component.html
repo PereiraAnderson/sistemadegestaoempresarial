@@ -18,17 +18,17 @@
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimentos">
-                <span>Meus requerimentos</span>
+                <span>Meus Requerimentos</span>
             </a>
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimento">
-                <span>Novo requerimento</span>
+                <span>Novo Requerimento</span>
             </a>
         </div>
         <div *ngIf="login.perfil == 1" class="menu-link-item">
             <a routerLink="/usuarios">
-                <span>Usuários</span>
+                <span>Ver Usuários</span>
             </a>
         </div>
         <div class="menu-link-item">
@@ -44,12 +44,13 @@
     </div>
 </div>
 <div class="inner-sidebar">
-    <div *ngFor="let p of pontos" class="inner-sidebar-content">
-        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
-        <div class="inner-sidebar-card">
-            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
+    <div class="inner-sidebar-content">
+        <div class="inner-sidebar-date">Hoje, {{ agora | date: 'dd'}} de {{ agora | date: 'MMMM'}}</div>
+        <div *ngFor="let p of pontos" class="inner-sidebar-card">
+            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm'}}</div>
             <div class="inner-sidebar-card-task">{{p.tarefa}}</div>
         </div>
+        <div *ngIf="pontos.length == 0" class="inner-sidebar-message">Nenhum ponto registrado ainda</div>
     </div>
 </div>
 <div class="main-content">

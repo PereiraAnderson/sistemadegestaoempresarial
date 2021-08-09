@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BancoComponent } from './components/banco/banco.component';
 import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
-import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { PontoComponent } from './components/ponto/ponto.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
   { path: '', component: PontoComponent, canActivate: [AuthGuardService] },
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService] },
-  { path: 'home', component: PontoComponent, canActivate: [AuthGuardService] },
   { path: 'banco', component: BancoComponent, canActivate: [AuthGuardService] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuardService] },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuardService] },

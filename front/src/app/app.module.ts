@@ -15,7 +15,6 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { HomeComponent } from './components/home/home.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CommonModule } from '@angular/common';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -42,7 +41,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     AppComponent,
     LogoutComponent,
     LoginComponent,
-    HomeComponent,
     CadastroUsuarioComponent,
     UsuariosComponent,
     UsuarioComponent,

@@ -18,20 +18,20 @@
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimentos">
-                <span>Meus requerimentos</span>
+                <span>Meus Requerimentos</span>
             </a>
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimento">
-                <span>Novo requerimento</span>
-            </a>
-        </div>
-        <div class="menu-link-item">
-            <a routerLink="/usuarios">
-                <span>Usuários</span>
+                <span>Novo Requerimento</span>
             </a>
         </div>
         <div *ngIf="login.perfil == 1" class="menu-link-item">
+            <a routerLink="/usuarios">
+                <span>Ver Usuários</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
             <a routerLink="/usuario">
                 <span>Editar Perfil</span>
             </a>
@@ -44,11 +44,13 @@
     </div>
 </div>
 <div class="main-content-full">
-    <div *ngFor="let p of pontos" class="inner-sidebar-content">
-        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
-        <div class="inner-sidebar-card">
-            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
-            <div class="inner-sidebar-card-task">{{ p.tarefa }}</div>
+    <div class="main-content-elements">
+        <div *ngFor="let p of pontos" class="inner-sidebar-content">
+            <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
+            <div class="inner-sidebar-card">
+                <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm'}}</div>
+                <div class="inner-sidebar-card-task">{{ p.tarefa }}</div>
+            </div>
         </div>
     </div>
 </div>
