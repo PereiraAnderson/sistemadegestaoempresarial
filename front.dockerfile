@@ -7,7 +7,7 @@ COPY front/*.conf ./
 COPY front/src src
 
 ARG env
-#RUN mv /app/src/environments/environment.prod.ts /app/src/environments/environment.ts
+RUN mv /app/src/environments/environment.prod.ts /app/src/environments/environment.ts
 
 RUN npm install && \
     npm run build
