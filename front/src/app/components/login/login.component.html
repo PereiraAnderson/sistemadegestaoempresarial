@@ -1,10 +1,10 @@
 <mat-card>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title><img src="../assets/logo.png"></mat-card-title>
     <mat-card-content>
         <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
             <p>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Login" name="login" [(ngModel)]="login.login" required>
+                    <input type="text" matInput placeholder="E-mail corporativo" name="login" [(ngModel)]="login.login" required>
                 </mat-form-field>
             </p>
             <p>
@@ -12,15 +12,14 @@
                     <input type="password" matInput placeholder="Senha" name="senha" [(ngModel)]="login.senha" required>
                 </mat-form-field>
             </p>
-            <div class="button">
-                <button type="submit" mat-button>Login</button>
+            <div class="b-login">
+                <button type="submit" mat-button>Entrar</button>
             </div>
         </form>
     </mat-card-content>
     <mat-card-content>
-        <div class="button">
-            <a [routerLink]="['/cadastro-usuario']" mat-button color='primary'>Cadastrar!</a>
+        <div class="b-recover">
+            Esqueceu sua senha?<a [routerLink]="['/cadastro-usuario']" mat-button>Redefinir</a>
         </div>
     </mat-card-content>
-
 </mat-card>

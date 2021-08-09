@@ -1,51 +1,80 @@
-<div class="ml-5">
-    <div class="row">
-        <div class="col m-3">
-            <mat-label>Novo usuário</mat-label>
+<div class="menu">
+    <div class="menu-logo"><img src="../assets/logo.png"></div>
+    <div class="menu-links">
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Notificações</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Funcionários</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a class="this-page" routerLink="/">
+                <span>Cadastrar Novo</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Sair</span>
+            </a>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field>
-                            <mat-label>Login</mat-label>
-                            <input matInput placeholder="Login" name="login" [(ngModel)]="usuario.login"
-                                [disabled]="usuario.id" required>
-                        </mat-form-field>
+</div>
+<div class="main-content-full">
+    <mat-card>
+    <div class="ml-5">
+        <div class="row">
+            <div class="col">
+                <mat-card-title>Cadastrar novo funcionário</mat-card-title>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
+                    <div class="row">
+                        <div class="col-8">
+                            <mat-form-field>
+                                <mat-label>E-mail corporativo</mat-label>
+                                <input matInput placeholder="Ex: nome@empresa" name="login" [(ngModel)]="usuario.login"
+                                    [disabled]="usuario.id" required>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field>
-                            <mat-label>Nome</mat-label>
-                            <input matInput placeholder="Nome" name="nome" [(ngModel)]="usuario.nome" required>
-                        </mat-form-field>
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field>
+                                <mat-label>Nome do funcionário</mat-label>
+                                <input matInput placeholder="Nome completo" name="nome" [(ngModel)]="usuario.nome" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <mat-label>CPF</mat-label>
+                                <input matInput placeholder="Apenas números" name="cpf" mask="000.000.000-00" [(ngModel)]="usuario.cpf"
+                                    required>
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <mat-label>CPF</mat-label>
-                            <input matInput placeholder="CPF" name="cpf" mask="000.000.000-00" [(ngModel)]="usuario.cpf"
-                                required>
-                        </mat-form-field>
+                    <div class="row">
+                        <div class="col-8">
+                            <mat-form-field>
+                                <mat-label>Senha</mat-label>
+                                <input type="password" matInput placeholder="Mín. 6 caracteres" minlength="6" name="senha"
+                                    [(ngModel)]="usuario.senha" required>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field>
-                            <mat-label>Senha</mat-label>
-                            <input type="password" matInput placeholder="Senha" minlength="6" name="senha"
-                                [(ngModel)]="usuario.senha" required>
-                        </mat-form-field>
+                    <div class="row mt-2">
+                        <div class="col-3">
+                            <button type="submit" class="b-register" mat-button>Cadastrar</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-2">
-                        <button type="submit" mat-raised-button>Cadastrar</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+    </mat-card>
 </div>

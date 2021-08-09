@@ -13,7 +13,7 @@ namespace SGE.Context.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Usuario)
-                .WithOne()
+                .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

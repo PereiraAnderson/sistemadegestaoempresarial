@@ -28,7 +28,9 @@ namespace SGE.Extensions
                 Justificativa = model.Justificativa,
                 Status = model.Status,
                 PontoId = model.PontoId,
-                Usuario = model.Usuario?.ToView()
+                UsuarioId = model.UsuarioId,
+                Usuario = model.Usuario?.ToView(),
+                Ponto = model.Ponto?.ToView()
             };
 
             GenericViewExtension.ToView(model, view);

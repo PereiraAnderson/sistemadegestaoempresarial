@@ -63,9 +63,11 @@ namespace SGE
                 options.UseSqlServer(_configuration.GetConnectionString("SqlServerSGE")));
 
             services.AddTransient<IPontoRepository, PontoRepository>();
+            services.AddTransient<IRequerimentoRepository, RequerimentoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             services.AddTransient<IPontoService, PontoService>();
+            services.AddTransient<IRequerimentoService, RequerimentoService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
         }
 

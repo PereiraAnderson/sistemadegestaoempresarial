@@ -1,41 +1,50 @@
-<!-- <div class="ml-5">
-    <div class="row">
-        <div class="col m-3">
-            <mat-label>{{acao}} ponto</mat-label>
+<div class="menu">
+    <div class="menu-logo"><img src="../assets/logo.png"></div>
+    <div class="menu-links">
+        <div class="menu-link-item">
+            <a class="this-page" routerLink="/ponto">
+                <span>Novo Ponto</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/pontos">
+                <span>Ver Registros</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Banco de Horas</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Editar Perfil</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Sair</span>
+            </a>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()">
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field>
-                            <input matInput name="data" [ngxMatDatetimePicker]="picker" placeholder="Data"
-                                [(ngModel)]="ponto.data" [disabled]="false" required>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
-                                [touchUi]="false" [color]="color" [enableMeridian]="false">
-                            </ngx-mat-datetime-picker>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-2">
-                        <button type="submit" mat-raised-button>{{acao}}</button>
-                    </div>
-                </div>
-            </form>
+</div>
+<div class="inner-sidebar">
+    <!--<div *ngFor="let p of data" class="inner-sidebar-content">
+        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
+        <div class="inner-sidebar-card">
+            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
+            <div class="inner-sidebar-card-task">{{p.tarefa}}</div>
         </div>
-    </div>
-</div> -->
-<app-pontos class=""></app-pontos>
+    </div>-->
+</div>
 <div class="main-content">
     <div class="main-content-elements">
         <div class="main-date">{{ agora | date: 'longDate'}}</div>
         <div class="main-time">{{ agora | date: 'HH:mm:ss'}}</div>
-        <a class="start btn" (click)="onSubmit()">Iniciar Trabalho</a>
+        <a class="btn b-start" (click)="onSubmit()">Iniciar Trabalho</a>
         <div class="main-task">
             <input type="text" [(ngModel)]="ponto.tarefa" placeholder="Inserir tarefa associada..." />
         </div>
     </div>
+    >>>>>>> front
 </div>

@@ -10,7 +10,9 @@ namespace SGE.Infra.Views
 
         public DateTimeOffset Saida { get; set; }
 
-        public DateTimeOffset Saldo { get; set; }
+        public DateTimeOffset Jornada { get; set; }
+
+        public string JornadaString { get; set; }
 
         public string Tarefas { get; set; }
     }

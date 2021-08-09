@@ -1,44 +1,34 @@
-<!-- <div class="row">
-    <div class="col">
-        <a class="float-right" [routerLink]="['/pontos', 0]" mat-raised-button color='primary'>Novo
-            Ponto</a>
-    </div>
-</div>
-
-<div class=" table-container mat-elevation-z8">
-    <div class="loading-shade" *ngIf="isLoadingResults || isError">
-        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-        <div class="error" *ngIf="isError">
-            Request error!
+<div class="menu">
+    <div class="menu-logo"><img src="../assets/logo.png"></div>
+    <div class="menu-links">
+        <div class="menu-link-item">
+            <a routerLink="/ponto">
+                <span>Novo Ponto</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a class="this-page" routerLink="/pontos">
+                <span>Ver Registros</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Banco de Horas</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Editar Perfil</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Sair</span>
+            </a>
         </div>
     </div>
-
-    <div class="table-intern-container">
-        <table mat-table [dataSource]="data">
-
-            <ng-container matColumnDef="data">
-                <th mat-header-cell *matHeaderCellDef> Data </th>
-                <td mat-cell *matCellDef="let data">{{ data.data | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="acoes">
-                <th mat-header-cell *matHeaderCellDef> Ações </th>
-                <td mat-cell *matCellDef="let data">
-                    <a mat-icon-button [routerLink]="['/pontos', data.id]">
-                        <mat-icon>edit</mat-icon>
-                    </a>
-                    <button mat-icon-button (click)="delete(data.id)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
-</div> -->
-<div class="inner-sidebar">
+</div>
+<div class="main-content-full">
     <div *ngFor="let p of data" class="inner-sidebar-content">
         <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
         <div class="inner-sidebar-card">

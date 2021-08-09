@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SGE.Context.Models;
@@ -44,29 +45,41 @@ namespace SGE.Services
             var pNorm = new PontoNormalizado();
             foreach (var p in pontos)
             {
-                pNorm.Tarefas = "";
+                pNorm.Tarefas += p.Tarefa + ".";
 
                 if (pNorm.Entrada.CompareTo(System.DateTimeOffset.MinValue) == 0)
                     pNorm.Entrada = p.Data;
                 else
                 {
                     pNorm.Saida = p.Data;
-                    pNorm.Saldo = pNorm.Saida.AddTicks(-pNorm.Entrada.Ticks);
+                    pNorm.Jornada = pNorm.Saida.AddTicks(-pNorm.Entrada.Ticks);
 
                     normalizados.Add(pNorm);
                     pNorm = new PontoNormalizado();
                 }
             }
 
+            var ticks1ano = DateTime.MinValue.AddYears(1).Ticks;
             var relatorio = new RelatorioPonto
             {
-                Saldo = System.DateTimeOffset.MinValue,
+                Saldo = new DateTime(ticks1ano),
                 Pontos = normalizados
             };
 
+            var ticks4horas = DateTime.MinValue.AddHours(4).Ticks;
+
             normalizados.ForEach(x =>
-                relatorio.Saldo = relatorio.Saldo.AddTicks(x.Saldo.Ticks)
-            );
+            {
+                var saldoTicks = x.Jornada.Ticks - ticks4horas;
+                x.JornadaString = x.Jornada.ToString("HH:mm");
+                relatorio.Saldo = relatorio.Saldo.AddTicks(saldoTicks);
+            });
+
+            if (relatorio.Saldo.Ticks < ticks1ano)
+                relatorio.SaldoString = "-" + new DateTime(ticks1ano)
+                .AddTicks(-relatorio.Saldo.Ticks).ToString("HH:mm");
+            else
+                relatorio.SaldoString = relatorio.Saldo.AddYears(-1).ToString("HH:mm");
 
             return relatorio;
         }

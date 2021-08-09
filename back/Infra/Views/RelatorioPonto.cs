@@ -12,5 +12,7 @@ namespace SGE.Infra.Views
         public List<PontoNormalizado> Pontos { get; set; }
 
         public DateTimeOffset Saldo { get; set; }
+
+        public string SaldoString { get; set; }
     }
 }
