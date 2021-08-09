@@ -31,4 +31,4 @@ docker run --network sge --name sge-front -d -p 80:80 sge/front:latest
 # Server will start at http://localhost:5000 and http://localhost
 ```
 
-// Try on http://
+Try on https://sge.pereiraanderson.com/
