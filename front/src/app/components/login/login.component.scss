@@ -1,20 +1,74 @@
 :host {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center;
-    margin: 100px 0px;
+    justify-content: flex-start;
+    align-items: center;
+    background: url('./../../../assets/bg.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-    
-.mat-form-field {
-    width: 100%;
-    min-width: 300px;
+
+mat-card-title, mat-card-content, mat-form-field, mat-button {
+    font-family: 'Open Sans', sans-serif !important;
+} 
+
+mat-card {
+    padding: 100px;
+    min-width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
 }
     
 mat-card-title, mat-card-content {
     display: flex;
     justify-content: center;
 }
-    
-.button {
-    display: flex;
-    justify-content: flex-end;
+
+mat-card-title img {
+    width: 180px;
+    height: auto;
+    margin-bottom: 15%;
+}
+
+mat-form-field {
+    width: 100%;
+    min-width: 300px;
+}
+
+mat-form-field input {
+    padding: 5px;
+}
+
+.b-login, .b-recover {
+    margin-top: 10%;
+}
+
+.b-login .mat-button {
+    width: 100%;
+    padding: 5px 0px;
+    border-radius: 5px;
+    background-color: #23b6ca;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.b-recover {
+    color: #2D2D2D;
+}
+
+.b-recover .mat-button {
+    color: #23b6ca;
+}
+
+.b-recover a.mat-button:hover {
+    text-decoration: none;
 }

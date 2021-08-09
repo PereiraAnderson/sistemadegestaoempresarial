@@ -37,4 +37,54 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
+<<<<<<< Updated upstream
 </div>
+=======
+</div> -->
+<div class="menu">
+    <div class="menu-logo"><img src="../assets/logo.png"></div>
+    <div class="menu-links">
+        <div class="menu-link-item">
+            <a routerLink="/ponto">
+                <span>Novo Ponto</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a class="this-page" routerLink="/pontos">
+                <span>Ver Registros</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Banco de Horas</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Editar Perfil</span>
+            </a>
+        </div>
+        <div class="menu-link-item">
+            <a routerLink="/">
+                <span>Sair</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="main-content-full">
+    <div *ngFor="let p of data" class="inner-sidebar-content">
+        <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
+        <div class="inner-sidebar-card">
+            <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm:ss'}}</div>
+            <div class="inner-sidebar-card-task">{{p.tarefa}}</div>
+        </div>
+    </div>
+</div>
+<!-- <div *ngIf="relatorio">
+    <div *ngFor="let p of relatorio.pontos">
+        <div class="inner-sidebar-date">Entrada: {{ p.entrada | date: 'HH:mm:ss'}}</div>
+        <div class="inner-sidebar-date">Saída: {{ p.saida | date: 'HH:mm:ss'}}</div>
+        <div class="inner-sidebar-date">Saldo: {{ p.saldo | date: 'HH:mm:ss'}}</div>
+    </div>
+</div> -->
+>>>>>>> Stashed changes
