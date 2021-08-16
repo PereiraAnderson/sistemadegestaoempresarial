@@ -44,13 +44,21 @@
     </div>
 </div>
 <div class="main-content-full">
-    <div *ngFor="let r of requerimentos" class="inner-sidebar-content">
-        <div class="inner-sidebar-date">Requerido: {{ r.dataCriacao | date: 'dd/MM/yyyy'}}</div>
-        <div class="inner-sidebar-card">
-            <div class="inner-sidebar-card-task">Status: {{ r.statusString }}</div>
-            <div class="inner-sidebar-card-task">Apontamento atual: {{ r.ponto.data | date: 'dd/MM/yyyy HH:mm:ss'}}
+    <mat-card>
+        <div class="ml-5 mr-5">
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <mat-card-title>Meus requerimentos</mat-card-title>
+                </div>
             </div>
-            <div class="inner-sidebar-card-task">justificativa: {{ r.justificativa }}</div>
+            <div class="request-grid">
+                <div *ngFor="let r of requerimentos" class="request-card mb-4">
+                    <div class="request-card-text"><b>Entrada a ser alterada/removida:</b> {{ r.ponto.data | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+                    <div class="request-card-text"><b>Descrição da solicitação:</b> {{ r.justificativa }}</div>
+                    <div class="request-card-text"><b>Requerimento realizado em:</b> {{ r.dataCriacao | date: 'dd/MM/yyyy'}}</div>
+                    <div class="request-card-text"><b>Status: </b><span>{{ r.statusString }}</span></div>
+                </div>
+            </div>
         </div>
-    </div>
+    </mat-card>
 </div>

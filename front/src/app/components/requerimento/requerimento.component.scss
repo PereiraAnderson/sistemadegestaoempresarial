@@ -1,6 +1,7 @@
 mat-card {
-    min-height: 90vh;
-    min-width: 90%;
+    height: 90vh;
+    width: 90%;
+    overflow: scroll;
 }
 
 mat-card-title, textarea, button, select, option, p {
@@ -10,8 +11,6 @@ mat-card-title, textarea, button, select, option, p {
 mat-card-title {
     font-weight: bold;
     color: #2D2D2D;
-    margin-top: 5%;
-    margin-bottom: 3%;
 }
 
 mat-form-field {
@@ -30,4 +29,15 @@ mat-form-field input {
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+select {
+    padding: 10px 30px;
+    width: 40%;
+    font-style: italic;
+}
+
+textarea {
+    padding: 20px 25px 40px 25px;
+    width: 40%;
 }

@@ -46,14 +46,14 @@
 <div class="main-content-full">
     <mat-card>
         <div class="ml-5">
-            <div class="row">
+            <div class="row mt-5 mb-4">
                 <div class="col">
                     <mat-card-title>Novo requerimento</mat-card-title>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>Selecione o horário para o qual gostaria de solicitar edição ou remoção:</p>
+                    <p>Selecione o horário para o qual gostaria de solicitar edição ou remoção*:</p>
                 </div>
             </div>
             <div class="row mt-2">
@@ -65,15 +65,15 @@
             </div>
             <div class="row mt-4">
                 <div class="col">
-                    <p>Entre com uma breve descrição da sua solicitação e do motivo do requerimento:</p>
+                    <p>Entre com uma breve descrição do requerimento*:</p>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="col">
-                    <textarea placeholder="Descrição" name="justificativa" [(ngModel)]="requerimento.justificativa" required></textarea>
+                    <textarea placeholder="Escreva se deseja alteração ou remoção do horário, e também a justificativa para a alteração/remoção." name="justificativa" [(ngModel)]="requerimento.justificativa" required></textarea>
                 </div>
             </div>
-            <div class="row mt-5">
+            <div class="row mt-4">
                 <div class="col">
                     <button class="b-request" (click)="onSubmit()" mat-button>Enviar Solicitação</button>
                 </div>

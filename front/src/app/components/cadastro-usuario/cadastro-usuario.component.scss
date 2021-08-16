@@ -1,6 +1,7 @@
 mat-card {
-    min-height: 90vh;
-    min-width: 90%;
+    height: 90vh;
+    width: 90%;
+    overflow: scroll;
 }
 
 mat-card-title, input, button, a {
@@ -10,8 +11,6 @@ mat-card-title, input, button, a {
 mat-card-title {
     font-weight: bold;
     color: #2D2D2D;
-    margin-top: 5%;
-    margin-bottom: 3%;
 }
 
 mat-form-field {
@@ -24,7 +23,6 @@ mat-form-field input {
 
 .b-register.mat-button {
     width: 100%;
-    margin-top: 5%;
     padding: 5px 0px;
     border-radius: 5px;
     background-color: #23b6ca;
