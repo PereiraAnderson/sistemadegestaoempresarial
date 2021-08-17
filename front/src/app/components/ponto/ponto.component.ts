@@ -50,7 +50,7 @@ export class PontoComponent implements OnInit {
 
   onSubmit() {
     const dt = new Date();
-    this.ponto.data = dt.toISOString();
+    this.ponto.data = dt //dt.toISOString();
 
     this.ponto.usuarioId = this.login.id;
 

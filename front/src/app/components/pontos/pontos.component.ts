@@ -31,7 +31,7 @@ export class PontosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPontos();
+    //this.getPontos();
     this.getUsuarios();
   }
 
@@ -63,6 +63,8 @@ export class PontosComponent implements OnInit {
     this.usuarioService.get({ params })
       .then((data: any) => {
         this.usuarios = data.listaItens.map(x => new Usuario(x));
+        this.usuarioSelecionado = this.usuarios[0];
+        this.getPontos();
       })
       .catch(() => {
       });
