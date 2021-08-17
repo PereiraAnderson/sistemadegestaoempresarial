@@ -45,12 +45,7 @@ namespace SGE.Extensions
                     query = query.Where(x => x.UsuarioId == filtro.UsuarioId);
 
                 if (filtro.Hoje.HasValue)
-                {
-                    var fuso = new System.TimeSpan(-3, 0, 0);
-                    var hojeFuso = System.DateTimeOffset.Now.ToOffset(fuso).Date;
-                    query = query.Where(x =>
-                        x.Data.ToOffset(fuso).Date.CompareTo(hojeFuso) == 0);
-                }
+                    query = query.Where(x => x.Data.AddHours(-3).Date.CompareTo(System.DateTimeOffset.Now.AddHours(-3).Date) == 0);
             }
 
             return query;
