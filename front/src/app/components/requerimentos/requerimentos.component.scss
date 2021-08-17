@@ -4,7 +4,7 @@ mat-card {
     overflow: scroll;
 }
 
-mat-card-title, .request-card {
+mat-card-title, .request-card, a {
     font-family: 'Open Sans', sans-serif !important;
 }
 
@@ -21,4 +21,43 @@ mat-card-title {
 
 .request-card-text span {
     color: #23B6CA;
+}
+
+.request-buttons {
+    display: flex;
+}
+
+.mat-button {
+    padding: 2px 15px;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.b-accept.mat-button {
+    color: #FFFFFF;
+    background-color: #23b6ca;
+    border: 2px solid #23b6ca;
+}
+
+.b-accept.mat-button:hover {
+    color: #23b6ca;
+    background-color: #FFFFFF;
+    border: 2px solid #23b6ca;
+    text-decoration: none;
+}
+
+.b-decline.mat-button {
+    color: #23b6ca;
+    background-color: #FFFFFF;
+    border: 2px solid #23b6ca;
+}
+
+.b-decline.mat-button:hover {
+    color: #FFFFFF;
+    background-color: #23b6ca;
+    border: 2px solid #23b6ca;
+    text-decoration: none;
 }

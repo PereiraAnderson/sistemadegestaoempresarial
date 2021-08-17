@@ -53,10 +53,15 @@
             </div>
             <div class="request-grid">
                 <div *ngFor="let r of requerimentos" class="request-card mb-4">
+                    <div class="request-card-text"><b>Funcionário:</b> (nome)</div>
                     <div class="request-card-text"><b>Entrada a ser alterada/removida:</b> {{ r.ponto.data | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
                     <div class="request-card-text"><b>Descrição da solicitação:</b> {{ r.justificativa }}</div>
                     <div class="request-card-text"><b>Requerimento realizado em:</b> {{ r.dataCriacao | date: 'dd/MM/yyyy'}}</div>
                     <div class="request-card-text"><b>Status: </b><span>{{ r.statusString }}</span></div>
+                    <div class="request-buttons mt-3">
+                        <a class="b-accept mr-2" [routerLink]="['/']" mat-button>Aprovar</a>
+                        <a class="b-decline" [routerLink]="['/']" mat-button>Recusar</a>
+                    </div>
                 </div>
             </div>
         </div>
