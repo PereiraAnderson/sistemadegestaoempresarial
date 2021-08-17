@@ -36,7 +36,7 @@ export class PontoComponent implements OnInit {
   ngOnInit() {
     var params = new HttpParams()
       .set("OrdenaPor", "Data")
-      .set("OrdenacaoAsc", "false")
+      .set("OrdenacaoAsc", "true")
       .set('UsuarioId', this.login.id.toString())
       .set('Hoje', 'true');
 
@@ -50,7 +50,7 @@ export class PontoComponent implements OnInit {
 
   onSubmit() {
     const dt = new Date();
-    this.ponto.data = dt.toISOString();
+    this.ponto.data = dt //dt.toISOString();
 
     this.ponto.usuarioId = this.login.id;
 

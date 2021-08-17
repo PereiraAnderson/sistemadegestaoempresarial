@@ -2,6 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PontoService } from 'src/app/api-services/ponto.service';
 import { RequerimentoService } from 'src/app/api-services/requerimento.service';
+import { EnumRequerimentoStatus } from 'src/app/models/enums/enumRequerimentoStatus';
 import { Login } from 'src/app/models/login';
 import { Requerimento } from 'src/app/models/requerimento';
 import { SessionService } from 'src/app/services/session.service';
@@ -25,12 +26,15 @@ export class RequerimentosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     var params = new HttpParams()
       .set("OrdenaPor", "Id")
       .set("OrdenacaoAsc", "false")
       .set("Includes", "Ponto")
-      .set('UsuarioId', this.login.id.toString());
+      .append("Includes", "Usuario");
+
+    if (this.login.perfil != 1)
+      params = params
+        .set('UsuarioId', this.login.id.toString());
 
     this.requerimentoService.get({ params })
       .then((data: any) => {
@@ -38,6 +42,22 @@ export class RequerimentosComponent implements OnInit {
       })
       .catch(() => {
       });
+  }
+
+  aprovar(id: number) {
+    let req = this.requerimentos.find(x => x.id == id);
+    req.status = EnumRequerimentoStatus.Aprovado;
+
+    this.requerimentoService.save(req)
+      .then(() => this.ngOnInit());
+  }
+
+  reprovar(id: number) {
+    let req = this.requerimentos.find(x => x.id == id);
+    req.status = EnumRequerimentoStatus.Reprovado;
+
+    this.requerimentoService.save(req)
+      .then(() => this.ngOnInit());
   }
 
 }

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams
-      .subscribe(params => this.return = params['return'] || '/home');
+      .subscribe(params => this.return = params['return'] || '/');
   }
 
   onSubmit(): void {

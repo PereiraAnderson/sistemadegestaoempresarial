@@ -1,6 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { UsuarioService } from 'src/app/api-services/usuario.service';
+import { Login } from 'src/app/models/login';
 import { Usuario } from 'src/app/models/usuario';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -9,13 +11,17 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class UsuariosComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['nome', 'telefone', 'email', 'acoes'];
+  displayedColumns: string[] = ['nome', 'email', 'cpf'];
   data: Usuario[] = [];
+  login: Login;
 
   isLoadingResults = true;
   isError = false;
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService,
+    private sessionService: SessionService) {
+    this.login = this.sessionService.getLogin();
+  }
 
   ngAfterViewInit() {
     this.get();
