@@ -12,7 +12,7 @@ export class Ponto extends GenericModel {
         super(item);
 
         if (item) {
-            this.data = new Date(item.data).toISOString();
+            this.data = new Date(item.data);
             this.tarefa = item.tarefa;
             this.usuarioId = item.usuarioId;
 

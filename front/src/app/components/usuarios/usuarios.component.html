@@ -1,7 +1,7 @@
 <div class="menu">
     <div class="menu-logo"><img src="../assets/logo.png"></div>
     <div class="menu-links">
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/ponto">
                 <span>Novo Ponto</span>
             </a>
@@ -18,10 +18,10 @@
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimentos">
-                <span>Meus Requerimentos</span>
+                <span>Ver Requerimentos</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/requerimento">
                 <span>Novo Requerimento</span>
             </a>
@@ -64,24 +64,13 @@
                         <th mat-header-cell *matHeaderCellDef> Nome </th>
                         <td mat-cell *matCellDef="let data">{{ data.nome }}</td>
                     </ng-container>
-                    <ng-container matColumnDef="telefone">
-                        <th mat-header-cell *matHeaderCellDef> Telefone </th>
-                        <td mat-cell *matCellDef="let data">{{ data.telefone }}</td>
-                    </ng-container>
                     <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef> E-mail </th>
-                        <td mat-cell *matCellDef="let data">{{ data.email }}</td>
+                        <td mat-cell *matCellDef="let data">{{ data.login }}</td>
                     </ng-container>
-                    <ng-container matColumnDef="acoes">
-                        <th mat-header-cell *matHeaderCellDef> Ações </th>
-                        <td mat-cell *matCellDef="let data">
-                            <a mat-icon-button [routerLink]="['/usuarios', data.id]">
-                                <mat-icon>edit</mat-icon>
-                            </a>
-                            <button mat-icon-button (click)="delete(data.id)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </td>
+                    <ng-container matColumnDef="cpf">
+                        <th mat-header-cell *matHeaderCellDef> CPF </th>
+                        <td mat-cell *matCellDef="let data">{{ data.cpf | mask: '000.000.000-00' }}</td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

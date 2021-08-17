@@ -1,4 +1,4 @@
-export const urlApi = 'https://sge.pereiraanderson.com:5000/';
+export const urlApi = 'https://sge.pereiraanderson.com/api/';
 
 export const environment = {
   production: true

@@ -1,7 +1,7 @@
 <div class="menu">
     <div class="menu-logo"><img src="../assets/logo.png"></div>
     <div class="menu-links">
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/ponto">
                 <span>Novo Ponto</span>
             </a>
@@ -18,10 +18,10 @@
         </div>
         <div class="menu-link-item">
             <a class="this-page" routerLink="/requerimentos">
-                <span>Meus Requerimentos</span>
+                <span>Ver Requerimentos</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/requerimento">
                 <span>Novo Requerimento</span>
             </a>
@@ -53,14 +53,17 @@
             </div>
             <div class="request-grid">
                 <div *ngFor="let r of requerimentos" class="request-card mb-4">
-                    <div class="request-card-text"><b>Funcionário:</b> (nome)</div>
-                    <div class="request-card-text"><b>Entrada a ser alterada/removida:</b> {{ r.ponto.data | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+                    <div *ngIf="login.perfil == 1" class="request-card-text"><b>Funcionário:</b> {{ r.usuario.nome }}
+                    </div>
+                    <div class="request-card-text"><b>Entrada a ser alterada/removida:</b> {{ r.ponto.data | date:
+                        'dd/MM/yyyy HH:mm:ss'}}</div>
                     <div class="request-card-text"><b>Descrição da solicitação:</b> {{ r.justificativa }}</div>
-                    <div class="request-card-text"><b>Requerimento realizado em:</b> {{ r.dataCriacao | date: 'dd/MM/yyyy'}}</div>
+                    <div class="request-card-text"><b>Requerimento realizado em:</b> {{ r.dataCriacao | date:
+                        'dd/MM/yyyy'}}</div>
                     <div class="request-card-text"><b>Status: </b><span>{{ r.statusString }}</span></div>
-                    <div class="request-buttons mt-3">
-                        <a class="b-accept mr-2" [routerLink]="['/']" mat-button>Aprovar</a>
-                        <a class="b-decline" [routerLink]="['/']" mat-button>Recusar</a>
+                    <div *ngIf="login.perfil == 1 && r.status == 1" class="request-buttons mt-3">
+                        <a class="b-accept mr-2" (click)="aprovar(r.id)" mat-button>Aprovar</a>
+                        <a class="b-decline" (click)=reprovar(r.id) mat-button>Recusar</a>
                     </div>
                 </div>
             </div>

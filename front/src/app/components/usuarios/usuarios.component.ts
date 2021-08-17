@@ -11,7 +11,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class UsuariosComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['nome', 'telefone', 'email', 'acoes'];
+  displayedColumns: string[] = ['nome', 'email', 'cpf'];
   data: Usuario[] = [];
   login: Login;
 
@@ -19,9 +19,9 @@ export class UsuariosComponent implements AfterViewInit {
   isError = false;
 
   constructor(private usuarioService: UsuarioService,
-    private sessionService: SessionService) { 
-      this.login = this.sessionService.getLogin();
-    }
+    private sessionService: SessionService) {
+    this.login = this.sessionService.getLogin();
+  }
 
   ngAfterViewInit() {
     this.get();

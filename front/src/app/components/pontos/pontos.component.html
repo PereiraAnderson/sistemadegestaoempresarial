@@ -1,7 +1,7 @@
 <div class="menu">
     <div class="menu-logo"><img src="../assets/logo.png"></div>
     <div class="menu-links">
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/ponto">
                 <span>Novo Ponto</span>
             </a>
@@ -18,10 +18,10 @@
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimentos">
-                <span>Meus Requerimentos</span>
+                <span>Ver Requerimentos</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/requerimento">
                 <span>Novo Requerimento</span>
             </a>
@@ -51,19 +51,27 @@
                     <mat-card-title>Todos os registros</mat-card-title>
                 </div>
                 <div class="col">
-                    <select class="float-right"></select>
+                    <select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()">
+                        <option *ngFor="let u of usuarios" [ngValue]="u">{{ u.nome }}</option>
+                    </select>
                 </div>
             </div>
-            <div *ngFor="let p of pontos">
-                <div class="register-date mb-3">{{ p.data | date: 'longDate'}}</div>
+            <div *ngFor="let p of pontos; let i = index">
+                <div *ngIf="i == 0 || pontos[i-1].data.day === p.data.day" class="register-date mb-3">{{ p.data | date:
+                    'longDate'}}</div>
                 <div class="register-card mb-4">
                     <div class="row">
                         <div class="col">
-                            <div class="register-card-time">{{ p.data | date: 'HH:mm'}}</div>
+                            <div *ngIf="!p.edit" class="register-card-time">{{ p.data | date: 'HH:mm'}}</div>
+                            <div *ngIf="p.edit"><input [(ngModel)]="p.data"></div>
                         </div>
                         <div class="col">
-                            <a mat-icon-button [routerLink]="['/']" class="float-right"><mat-icon>delete</mat-icon></a>
-                            <a mat-icon-button [routerLink]="['/']" class="float-right"><mat-icon>edit</mat-icon></a>
+                            <a mat-icon-button (click)="delete(i)" class="float-right">
+                                <mat-icon>delete</mat-icon>
+                            </a>
+                            <a mat-icon-button (click)="p.edit = 1" class="float-right">
+                                <mat-icon>edit</mat-icon>
+                            </a>
                         </div>
                     </div>
                     <div class="row">

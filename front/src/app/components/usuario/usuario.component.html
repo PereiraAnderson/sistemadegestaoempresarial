@@ -1,7 +1,7 @@
 <div class="menu">
     <div class="menu-logo"><img src="../assets/logo.png"></div>
     <div class="menu-links">
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/ponto">
                 <span>Novo Ponto</span>
             </a>
@@ -18,10 +18,10 @@
         </div>
         <div class="menu-link-item">
             <a routerLink="/requerimentos">
-                <span>Meus Requerimentos</span>
+                <span>Ver Requerimentos</span>
             </a>
         </div>
-        <div class="menu-link-item">
+        <div *ngIf="login.perfil != 1" class="menu-link-item">
             <a routerLink="/requerimento">
                 <span>Novo Requerimento</span>
             </a>
@@ -58,8 +58,10 @@
                             <div class="col-3">
                                 <mat-form-field>
                                     <mat-label>Tipo de Usuário</mat-label>
-                                    <mat-select name="perfil" [(ngModel)]="usuario.perfil" required [disabled]="usuario.id">
-                                        <mat-option *ngFor="let p of perfis; index as i" [value]="i+1">{{p}}</mat-option>
+                                    <mat-select name="perfil" [(ngModel)]="usuario.perfil" required
+                                        [disabled]="usuario.id">
+                                        <mat-option *ngFor="let p of perfis; index as i" [value]="i+1">{{p}}
+                                        </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -81,8 +83,8 @@
                             <div class="col-3">
                                 <mat-form-field>
                                     <mat-label>CPF</mat-label>
-                                    <input matInput placeholder="CPF" name="cpf" mask="000.000.000-00" [(ngModel)]="usuario.cpf"
-                                        required>
+                                    <input matInput placeholder="CPF" name="cpf" mask="000.000.000-00"
+                                        [(ngModel)]="usuario.cpf" required>
                                 </mat-form-field>
                             </div>
                         </div>
