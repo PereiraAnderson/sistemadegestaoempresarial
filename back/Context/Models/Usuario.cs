@@ -19,5 +19,7 @@ namespace SGE.Context.Models
 
         [Required]
         public EnumUsuarioPerfil Perfil { get; set; }
+
+        public double SalarioHora { get; set; }
     }
 }

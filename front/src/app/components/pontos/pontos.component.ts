@@ -19,6 +19,9 @@ export class PontosComponent implements OnInit {
   usuarios: Usuario[] = [];
   usuarioSelecionado: Usuario;
 
+  hora: string;
+  edit: boolean;
+
   login: Login;
   relatorio: RelatorioPonto;
 
@@ -31,7 +34,6 @@ export class PontosComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getPontos();
     this.getUsuarios();
   }
 
@@ -71,7 +73,11 @@ export class PontosComponent implements OnInit {
   }
 
   update(id: number) {
-    this.pontoService.delete(id)
+    let ponto = this.pontos.find(x => x.id == id);
+    var split = this.hora.split(':');
+    ponto.data = new Date(ponto.data.setHours(+split[0], +split[1]));
+
+    this.pontoService.save(ponto)
       .then(() => this.getPontos());
   }
 

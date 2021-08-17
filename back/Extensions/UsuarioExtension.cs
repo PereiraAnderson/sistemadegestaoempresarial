@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using SGE.Context.Models;
 using SGE.Infra.Filters;
 using SGE.Infra.Views.Models;
@@ -16,7 +15,8 @@ namespace SGE.Extensions
                 CPF = view.CPF,
                 Perfil = view.Perfil,
                 Login = view.Login,
-                Senha = view.Senha
+                Senha = view.Senha,
+                SalarioHora = view.SalarioHora
             };
 
             GenericViewExtension.ToModel(view, model);
@@ -31,7 +31,8 @@ namespace SGE.Extensions
                 CPF = model.CPF,
                 Perfil = model.Perfil,
                 Login = model.Login,
-                Senha = model.Senha
+                Senha = model.Senha,
+                SalarioHora = model.SalarioHora
             };
 
             GenericViewExtension.ToView(model, view);

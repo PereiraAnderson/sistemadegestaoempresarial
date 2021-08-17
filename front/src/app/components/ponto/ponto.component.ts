@@ -27,7 +27,10 @@ export class PontoComponent implements OnInit {
     private sessionService: SessionService) {
     this.agora = new Date();
     this.login = this.sessionService.getLogin();
-    this.ponto = new Ponto();
+
+    if (this.login.perfil == 1)
+      this.router.navigate(['/usuarios']);
+
     setInterval(() => {
       this.agora = new Date();
     }, 1000);
@@ -50,7 +53,8 @@ export class PontoComponent implements OnInit {
 
   onSubmit() {
     const dt = new Date();
-    this.ponto.data = dt //dt.toISOString();
+    this.ponto = new Ponto();
+    this.ponto.data = dt;
 
     this.ponto.usuarioId = this.login.id;
 

@@ -8,6 +8,7 @@ export class Usuario extends GenericModel {
     perfil: EnumUsuarioPerfil;
     login: string;
     senha: string;
+    salarioHora: number;
 
     constructor(item?) {
         super(item);
@@ -19,6 +20,7 @@ export class Usuario extends GenericModel {
             this.perfil = item.perfil;
             this.login = item.login;
             this.senha = item.senha;
+            this.salarioHora = item.salarioHora;
         }
     }
 }
