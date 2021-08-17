@@ -17,13 +17,18 @@ mat-card {
     overflow: scroll;
 }
 
-mat-card-title, .request-card, a {
+mat-card-title, .request-card, a, select {
     font-family: 'Open Sans', sans-serif !important;
 }
 
 mat-card-title {
     font-weight: bold;
     color: #2D2D2D;
+}
+
+select {
+    padding: 5px 10px;
+    font-style: italic;
 }
 
 .register-card {
@@ -53,4 +58,17 @@ mat-card-title {
 
 a.mat-icon-button:hover {
     color: #23b6ca !important;
+}
+
+a.mat-icon-button.blue-icon {
+    color: #23b6ca !important;
+}
+
+a.mat-icon-button.blue-icon:hover {
+    color: #1e9aaa !important;
+}
+
+.edit-time {
+    display: flex;
+    align-items: center;
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SGE.Context.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class ManyRequerimentos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -51,21 +51,31 @@
                     <mat-card-title>Todos os registros</mat-card-title>
                 </div>
                 <div *ngIf="login.perfil == 1" class="col">
-                    <select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()">
+                    <select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()" class="float-right">
                         <option *ngFor="let u of usuarios" [ngValue]="u">{{ u.nome }}</option>
                     </select>
                 </div>
             </div>
             <div *ngFor="let p of pontos; let i = index">
-                <div *ngIf="i == 0 || pontos[i-1].data.getDay() !== p.data.getDay()" class="register-date mb-3">{{
-                    p.data | date:
-                    'longDate'}}</div>
+                <div *ngIf="i == 0 || pontos[i-1].data.getDay() !== p.data.getDay()" class="register-date mb-3">
+                    {{ p.data | date: 'longDate'}}
+                </div>
                 <div class="register-card mb-4">
                     <div class="row">
-                        <div class="col">
+                        <div class="col edit-time">
                             <div *ngIf="!p.edit" class="register-card-time">{{ p.data | date: 'HH:mm'}}</div>
                             <div *ngIf="p.edit">
-                                <input [(ngModel)]="p.dataAux" mask="00:00">
+                                <input [(ngModel)]="hora" mask="hh:mm" [dropSpecialCharacters]="false">
+                            </div>
+                            <div *ngIf="p.edit">
+                                <a mat-icon-button (click)="update(p.id)" class="float-right blue-icon">
+                                    <mat-icon>check</mat-icon>
+                                </a>
+                            </div>
+                            <div *ngIf="p.edit">
+                                <a mat-icon-button (click)="p.edit = 0" class="float-right blue-icon">
+                                    <mat-icon>clear</mat-icon>
+                                </a>
                             </div>
                         </div>
                         <div *ngIf="login.perfil == 1" class="col">

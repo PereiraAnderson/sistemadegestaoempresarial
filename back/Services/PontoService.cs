@@ -14,9 +14,12 @@ namespace SGE.Services
     {
         private readonly IPontoRepository _repo;
 
-        public PontoService(IPontoRepository repo)
+        private readonly IUsuarioService _usuarioService;
+
+        public PontoService(IPontoRepository repo, IUsuarioService usuarioService)
         {
             _repo = repo;
+            _usuarioService = usuarioService;
         }
 
         public IEnumerable<Ponto> Get(PontoFiltro filtro = null, Ordenacao ordenacao = null) =>
@@ -75,11 +78,20 @@ namespace SGE.Services
                 relatorio.Saldo = relatorio.Saldo.AddTicks(saldoTicks);
             });
 
+            var usuario = _usuarioService.Get(usuarioId);
+
             if (relatorio.Saldo.Ticks < ticks1ano)
+            {
                 relatorio.SaldoString = "-" + new DateTime(ticks1ano)
-                .AddTicks(-relatorio.Saldo.Ticks).ToString("HH:mm");
+                    .AddTicks(-relatorio.Saldo.Ticks).ToString("HH:mm");
+                relatorio.Pagamento = 0;
+            }
             else
+            {
                 relatorio.SaldoString = relatorio.Saldo.AddYears(-1).ToString("HH:mm");
+                relatorio.Pagamento = relatorio.Saldo.AddYears(-1).Hour * usuario.SalarioHora +
+                    relatorio.Saldo.AddYears(-1).Minute * (usuario.SalarioHora / 60);
+            }
 
             return relatorio;
         }

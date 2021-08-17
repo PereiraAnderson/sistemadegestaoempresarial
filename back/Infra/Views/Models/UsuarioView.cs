@@ -13,5 +13,7 @@ namespace SGE.Infra.Views.Models
         public string Senha { get; set; }
 
         public EnumUsuarioPerfil Perfil { get; set; }
+
+        public double SalarioHora { get; set; }
     }
 }

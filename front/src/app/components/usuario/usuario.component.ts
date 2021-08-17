@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/api-services/usuario.service';
 import { Login } from 'src/app/models/login';
 import { Usuario } from 'src/app/models/usuario';
@@ -16,9 +16,9 @@ export class UsuarioComponent implements OnInit {
   acao: string;
   perfis: string[];
   login: Login;
+  salarioHora: string;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private usuarioService: UsuarioService,
     private sessionService: SessionService
@@ -32,7 +32,7 @@ export class UsuarioComponent implements OnInit {
     if (this.login) {
       this.usuarioService.getById(this.login.id)
         .then((data) => {
-          this.usuario = new Usuario(data)
+          this.usuario = new Usuario(data);
         });
       this.acao = 'Editar';
     }
@@ -42,7 +42,8 @@ export class UsuarioComponent implements OnInit {
   }
 
   onSubmit() {
+    this.usuario.salarioHora = +this.usuario.salarioHora;
     this.usuarioService.save(this.usuario)
-      .then(() => this.router.navigate(['/usuarios']));
+      .then(() => this.router.navigate(['/ponto']));
   }
 }

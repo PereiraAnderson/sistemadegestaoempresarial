@@ -1,5 +1,29 @@
-.inner-sidebar-date {
-    margin-top: 5%;
+mat-card {
+    height: 90vh;
+    width: 90%;
+    overflow: scroll;
+}
+
+mat-card-title, .report-card {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+mat-card-title {
+    font-weight: bold;
     color: #2D2D2D;
-    font-size: 1.2rem;
+}
+
+mat-card-title span {
+    color: #23B6CA;
+}
+
+select {
+    padding: 5px 10px;
+    font-style: italic;
+}
+
+.report-card {
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    padding: 40px;
 }

@@ -14,5 +14,7 @@ namespace SGE.Infra.Views
         public DateTimeOffset Saldo { get; set; }
 
         public string SaldoString { get; set; }
+
+        public double Pagamento { get; set; }
     }
 }
