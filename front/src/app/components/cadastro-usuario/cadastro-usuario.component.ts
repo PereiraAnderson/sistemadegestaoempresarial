@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/api-services/usuario.service';
 import { EnumUsuarioPerfil } from 'src/app/models/enums/enumUsuarioPerfil';
 import { Login } from 'src/app/models/login';
@@ -18,6 +18,7 @@ export class CadastroUsuarioComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private sessionService: SessionService
   ) {
@@ -26,11 +27,24 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.route.params.subscribe((params: Params) => {
+      const id = params['id'];
+      if (id != 0) {
+        this.usuarioService.getById(id)
+          .then((data) => {
+            this.usuario = new Usuario(data);
+          });
+        this.acao = 'Editar';
+      }
+      else {
+        this.usuario = new Usuario();
+      }
+    });
   }
 
   onSubmit() {
     this.usuario.perfil = EnumUsuarioPerfil.FUNCIONARIO;
+    this.usuario.salarioHora = +this.usuario.salarioHora;
     this.usuarioService.save(this.usuario)
       .then(() => this.router.navigate(['/usuarios']));
   }

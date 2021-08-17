@@ -11,7 +11,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class UsuariosComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['nome', 'email', 'cpf'];
+  displayedColumns: string[] = ['nome', 'email', 'cpf', 'acoes'];
   data: Usuario[] = [];
   login: Login;
 

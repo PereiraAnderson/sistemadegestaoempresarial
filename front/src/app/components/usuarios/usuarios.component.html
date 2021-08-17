@@ -47,7 +47,7 @@
     <mat-card>
         <div class="row mb-2">
             <div class="col">
-                <a class="float-right b-new" [routerLink]="['/cadastro-usuario']" mat-button>Novo
+                <a class="float-right b-new" [routerLink]="['/cadastro-usuario', 0]" mat-button>Novo
                     Usuário</a>
             </div>
         </div>
@@ -71,6 +71,14 @@
                     <ng-container matColumnDef="cpf">
                         <th mat-header-cell *matHeaderCellDef> CPF </th>
                         <td mat-cell *matCellDef="let data">{{ data.cpf | mask: '000.000.000-00' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="acoes">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let data">
+                            <a mat-icon-button [routerLink]="['/cadastro-usuario', data.id]">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

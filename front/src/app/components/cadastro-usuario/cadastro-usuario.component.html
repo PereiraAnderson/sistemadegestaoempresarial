@@ -58,8 +58,8 @@
                             <div class="col-8">
                                 <mat-form-field>
                                     <mat-label>E-mail corporativo</mat-label>
-                                    <input matInput placeholder="Ex: nome@empresa" name="login" [(ngModel)]="usuario.login"
-                                        [disabled]="usuario.id" required>
+                                    <input matInput placeholder="Ex: nome@empresa" name="login"
+                                        [(ngModel)]="usuario.login" [disabled]="usuario.id" required>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -67,29 +67,39 @@
                             <div class="col-4">
                                 <mat-form-field>
                                     <mat-label>Nome do funcionário</mat-label>
-                                    <input matInput placeholder="Nome completo" name="nome" [(ngModel)]="usuario.nome" required>
+                                    <input matInput placeholder="Nome completo" name="nome" [(ngModel)]="usuario.nome"
+                                        required>
                                 </mat-form-field>
                             </div>
                             <div class="col-4">
                                 <mat-form-field>
                                     <mat-label>CPF</mat-label>
-                                    <input matInput placeholder="Apenas números" name="cpf" mask="000.000.000-00" [(ngModel)]="usuario.cpf"
+                                    <input matInput placeholder="Apenas números" name="cpf" mask="000.000.000-00"
+                                        [(ngModel)]="usuario.cpf" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field>
+                                    <mat-label>Salário Hora</mat-label>
+                                    <input [disabled]="login.perfil != 1" type="number" matInput
+                                        [dropSpecialCharacters]="false" mask="00.00" placeholder="Salário hora"
+                                        name="salarioHora" min="00.00" max="99.99" [(ngModel)]="usuario.salarioHora"
                                         required>
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="row">
+                        <div *ngIf="!usuario.id" class="row">
                             <div class="col-8">
                                 <mat-form-field>
                                     <mat-label>Senha</mat-label>
-                                    <input type="password" matInput placeholder="Mín. 6 caracteres" minlength="6" name="senha"
-                                        [(ngModel)]="usuario.senha" required>
+                                    <input type="password" matInput placeholder="Mín. 6 caracteres" minlength="6"
+                                        name="senha" [(ngModel)]="usuario.senha" required>
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-3">
-                                <button type="submit" class="b-register" mat-button>Cadastrar</button>
+                                <button type="submit" class="b-register" mat-button>Salvar</button>
                             </div>
                         </div>
                     </form>
