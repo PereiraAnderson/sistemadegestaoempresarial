@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<div class="main-content-full">
+<!--<div class="main-content-full">
     <div *ngIf="relatorio">
         <p>Saldo Total: {{ relatorio.saldoString }}</p>
         <div style="border: 3px; border-style: double;" *ngFor="let p of relatorio.pontos">
@@ -53,4 +53,26 @@
             <div class="inner-sidebar-date">Tarefa: {{ p.tarefas }}</div>
         </div>
     </div>
+</div>-->
+<div class="main-content-full">
+    <mat-card>
+        <div *ngIf="relatorio" class="ml-5 mr-5">
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <mat-card-title>Saldo total: <span>{{ relatorio.saldoString }}</span></mat-card-title>
+                </div>
+                <div class="col">
+                    <!--<select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()" class="float-right">
+                        <option *ngFor="let u of usuarios" [ngValue]="u">{{ u.nome }}</option>
+                    </select>-->
+                </div>
+            </div>
+            <div *ngFor="let p of relatorio.pontos" class="report-card mb-4">
+                <div class="report-text"><b>Entrada:</b> {{ p.entrada | date: 'HH:mm:ss'}}</div>
+                <div class="report-text"><b>Saída:</b> {{ p.saida | date: 'HH:mm:ss'}}</div>
+                <div class="report-text"><b>Jornada:</b> {{ p.jornadaString }}</div>
+                <div class="report-text"><b>Tarefa:</b> {{ p.tarefas }}</div>
+            </div>
+        </div>
+    </mat-card>
 </div>
