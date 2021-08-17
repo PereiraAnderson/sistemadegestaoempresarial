@@ -38,12 +38,12 @@ export class CadastroUsuarioComponent implements OnInit {
       }
       else {
         this.usuario = new Usuario();
+        this.usuario.perfil = EnumUsuarioPerfil.FUNCIONARIO;
       }
     });
   }
 
   onSubmit() {
-    this.usuario.perfil = EnumUsuarioPerfil.FUNCIONARIO;
     this.usuario.salarioHora = +this.usuario.salarioHora;
     this.usuarioService.save(this.usuario)
       .then(() => this.router.navigate(['/usuarios']));

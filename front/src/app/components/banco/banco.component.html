@@ -46,17 +46,19 @@
 <div class="main-content-full">
     <mat-card>
         <div *ngIf="relatorio" class="ml-5 mr-5">
-            <div class="row mt-5 mb-4">
+            <div class="row mt-5">
                 <div class="col">
                     <mat-card-title>Saldo total: <span>{{ relatorio.saldoString }}</span></mat-card-title>
-                </div>
-                <div class="col">
-                    <mat-card-title>Pagamento: <span>{{ relatorio.pagamento | currency: "BRL" }}</span></mat-card-title>
                 </div>
                 <div *ngIf="login.perfil == 1" class="col">
                     <select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()" class="float-right">
                         <option *ngFor="let u of usuarios" [ngValue]="u">{{ u.nome }}</option>
                     </select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <mat-card-title>Valor total das horas extras: <span>{{ relatorio.pagamento | currency: "BRL" }}</span></mat-card-title>
                 </div>
             </div>
             <div *ngFor="let p of relatorio.pontos" class="report-card mb-4">
