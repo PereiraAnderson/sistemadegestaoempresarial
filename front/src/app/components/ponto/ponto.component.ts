@@ -36,7 +36,7 @@ export class PontoComponent implements OnInit {
   ngOnInit() {
     var params = new HttpParams()
       .set("OrdenaPor", "Data")
-      .set("OrdenacaoAsc", "false")
+      .set("OrdenacaoAsc", "true")
       .set('UsuarioId', this.login.id.toString())
       .set('Hoje', 'true');
 
@@ -55,6 +55,6 @@ export class PontoComponent implements OnInit {
     this.ponto.usuarioId = this.login.id;
 
     this.pontoService.save(this.ponto)
-      .then(() => this.router.navigate(['/ponto']));
+      .then(() => this.router.navigate(['/pontos']));
   }
 }

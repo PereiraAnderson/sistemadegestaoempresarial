@@ -44,13 +44,35 @@
     </div>
 </div>
 <div class="main-content-full">
-    <div class="main-content-elements">
-        <div *ngFor="let p of pontos" class="inner-sidebar-content">
-            <div class="inner-sidebar-date">{{ p.data | date: 'longDate'}}</div>
-            <div class="inner-sidebar-card">
-                <div class="inner-sidebar-card-time">{{ p.data | date: 'HH:mm'}}</div>
-                <div class="inner-sidebar-card-task">{{ p.tarefa }}</div>
+    <mat-card>
+        <div class="ml-5 mr-5">
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <mat-card-title>Todos os registros</mat-card-title>
+                </div>
+                <div class="col">
+                    <select class="float-right"></select>
+                </div>
+            </div>
+            <div *ngFor="let p of pontos">
+                <div class="register-date mb-3">{{ p.data | date: 'longDate'}}</div>
+                <div class="register-card mb-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="register-card-time">{{ p.data | date: 'HH:mm'}}</div>
+                        </div>
+                        <div class="col">
+                            <a mat-icon-button [routerLink]="['/']" class="float-right"><mat-icon>delete</mat-icon></a>
+                            <a mat-icon-button [routerLink]="['/']" class="float-right"><mat-icon>edit</mat-icon></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="register-card-task">{{ p.tarefa }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </mat-card>
 </div>

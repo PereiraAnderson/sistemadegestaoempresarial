@@ -57,7 +57,7 @@
     <div class="main-content-elements">
         <div class="main-date">{{ agora | date: 'longDate'}}</div>
         <div class="main-time">{{ agora | date: 'HH:mm:ss'}}</div>
-        <a class="btn b-start" (click)="onSubmit()">Iniciar Trabalho</a>
+        <a class="btn b-start" (click)="onSubmit()">Registrar Ponto</a>
         <div class="main-task">
             <input type="text" [(ngModel)]="ponto.tarefa" placeholder="Inserir tarefa associada..." />
         </div>

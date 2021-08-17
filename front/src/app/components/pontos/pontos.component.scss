@@ -11,29 +11,46 @@
     width: 100%;
 }
 
-.inner-sidebar-card {
-    margin-top: 2%;
-    padding: 3% 3%;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    background-color: #FFFFFF;
+mat-card {
+    height: 90vh;
+    width: 90%;
+    overflow: scroll;
 }
 
-.inner-sidebar-date {
-    margin-top: 5%;
+mat-card-title, .request-card, a {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+mat-card-title {
+    font-weight: bold;
+    color: #2D2D2D;
+}
+
+.register-card {
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.register-date {
     color: #2D2D2D;
     font-size: 1.1rem;
     text-transform: uppercase;
+    color: #23B6CA;
 }
 
-.inner-sidebar-card-time {
+.register-card-time {
     color: #2D2D2D;
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1%;
 }
 
-.inner-sidebar-card-task {
+.register-card-task {
     color: #443a3a;
     font-size: 1.2rem;
+    font-style: italic;
+}
+
+a.mat-icon-button:hover {
+    color: #23b6ca !important;
 }
