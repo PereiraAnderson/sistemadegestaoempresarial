@@ -50,26 +50,29 @@
                 <div class="col">
                     <mat-card-title>Todos os registros</mat-card-title>
                 </div>
-                <div class="col">
+                <div *ngIf="login.perfil == 1" class="col">
                     <select name="usuarios" [(ngModel)]="usuarioSelecionado" (change)="getPontos()">
                         <option *ngFor="let u of usuarios" [ngValue]="u">{{ u.nome }}</option>
                     </select>
                 </div>
             </div>
             <div *ngFor="let p of pontos; let i = index">
-                <div *ngIf="i == 0 || pontos[i-1].data.day === p.data.day" class="register-date mb-3">{{ p.data | date:
+                <div *ngIf="i == 0 || pontos[i-1].data.getDay() !== p.data.getDay()" class="register-date mb-3">{{
+                    p.data | date:
                     'longDate'}}</div>
                 <div class="register-card mb-4">
                     <div class="row">
                         <div class="col">
                             <div *ngIf="!p.edit" class="register-card-time">{{ p.data | date: 'HH:mm'}}</div>
-                            <div *ngIf="p.edit"><input [(ngModel)]="p.data"></div>
+                            <div *ngIf="p.edit">
+                                <input [(ngModel)]="p.dataAux" mask="00:00">
+                            </div>
                         </div>
-                        <div class="col">
-                            <a mat-icon-button (click)="delete(i)" class="float-right">
+                        <div *ngIf="login.perfil == 1" class="col">
+                            <a mat-icon-button (click)="delete(p.id)" class="float-right">
                                 <mat-icon>delete</mat-icon>
                             </a>
-                            <a mat-icon-button (click)="p.edit = 1" class="float-right">
+                            <a mat-icon-button (click)="p.edit = !p.edit" class="float-right">
                                 <mat-icon>edit</mat-icon>
                             </a>
                         </div>

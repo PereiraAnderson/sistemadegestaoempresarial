@@ -2,7 +2,7 @@ import { GenericModel } from './genericModel';
 import { Usuario } from './usuario';
 
 export class Ponto extends GenericModel {
-    data: any;
+    data: Date;
     tarefa: string;
 
     usuarioId: number;
